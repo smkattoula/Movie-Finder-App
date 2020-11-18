@@ -16,6 +16,14 @@ const MovieState = (props) => {
   // Search Movies
   const searchMovies = async (text) => {
     setLoading();
+
+    const res = await axios.get(`SEND REQUEST
+    https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`);
+
+    dispatch({
+      type: SEARCH_MOVIES,
+      payload: res.data.items,
+    });
   };
 
   // Clear Movies

@@ -1,15 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Search from "./components/Search";
 import "./index.css";
+
+import MovieState from "./context/movie/MovieState";
 
 const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-      </div>
-    </Router>
+    <MovieState>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Search />
+            </Switch>
+          </div>
+        </div>
+      </Router>
+    </MovieState>
   );
 };
 
