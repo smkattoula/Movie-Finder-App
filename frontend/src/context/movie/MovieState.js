@@ -17,12 +17,13 @@ const MovieState = (props) => {
   const searchMovies = async (text) => {
     setLoading();
 
-    const res = await axios.get(`SEND REQUEST
-    https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`);
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&query=${text}&page=1&include_adult=false`
+    );
 
     dispatch({
       type: SEARCH_MOVIES,
-      payload: res.data.items,
+      payload: console.log(res.data.results),
     });
   };
 
@@ -40,7 +41,7 @@ const MovieState = (props) => {
         loading: state.loading,
         searchMovies,
         clearMovies,
-        getMovie,
+        // getMovie,
       }}
     >
       {props.children}

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Form, FormGroup, Input } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
 const Search = () => {
@@ -20,28 +21,32 @@ const Search = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="form">
-        <input
-          type="text"
-          name="text"
-          placeholder="Search movies.."
-          value={text}
-          onChange={onChange}
-        />
-        <input
-          type="submit"
-          value="Search"
-          className="btn btn-dark btn-block"
-        />
-      </form>
-      {movieContext.movies.length > 0 && (
+      <Form onSubmit={onSubmit} className="mt-3">
+        <FormGroup>
+          <Input
+            type="text"
+            name="text"
+            placeholder="Search movies.."
+            value={text}
+            onChange={onChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            type="submit"
+            value="Search"
+            className="btn btn-dark btn-block"
+          />
+        </FormGroup>
+      </Form>
+      {/* {movieContext.movies.length > 0 && (
         <button
           className="btn btn-light btn-block"
           onClick={movieContext.clearMovies}
         >
           Clear
         </button>
-      )}
+      )} */}
     </div>
   );
 };
