@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import MovieContext from "./MovieContext";
 import MovieReducer from "./MovieReducer";
-import { SEARCH_MOVIES, SET_LOADING, CLEAR_MOVIES, GET_MOVIE } from "../types";
+import { SEARCH_MOVIES, SET_LOADING, CLEAR_MOVIES } from "../types";
 
 const MovieState = (props) => {
   const initialState = {
@@ -23,7 +23,7 @@ const MovieState = (props) => {
 
     dispatch({
       type: SEARCH_MOVIES,
-      payload: console.log(res.data.results),
+      payload: res.data.results,
     });
   };
 
