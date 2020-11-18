@@ -20,8 +20,8 @@ const Search = () => {
   const onChange = (e) => setText(e.target.value);
 
   return (
-    <div>
-      <Form onSubmit={onSubmit} className="mt-3">
+    <div className="mt-3">
+      <Form onSubmit={onSubmit}>
         <FormGroup>
           <Input
             type="text"
