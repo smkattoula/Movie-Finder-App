@@ -53,7 +53,7 @@ const MovieState = (props) => {
     https://api.themoviedb.org/3/movie/${id}/credits?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
     `);
 
-    dispatch({ type: GET_CREDITS, payload: res.data.crew });
+    dispatch({ type: GET_CREDITS, payload: res.data });
   };
 
   // Clear Movies
