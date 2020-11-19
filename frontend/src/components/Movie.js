@@ -17,7 +17,7 @@ const Movie = ({ match }) => {
 
   const { crew } = credits;
 
-  const director = crew.find((crew) => crew.job === "Director");
+  console.log(crew.find((crew) => crew.job === "Director").name);
 
   //   console.log(director.name);
 
@@ -44,7 +44,7 @@ const Movie = ({ match }) => {
             <strong>{overview}</strong>
           </h4>
           <h2 className="text-center mt-3">Release Date: {release_date}</h2>
-          <h2 className="text-center mt-3">Director: {director.name} </h2>
+          {/* <h2 className="text-center mt-3">Director: {director.name} </h2> */}
         </CardBody>
       </Card>
     </Fragment>
