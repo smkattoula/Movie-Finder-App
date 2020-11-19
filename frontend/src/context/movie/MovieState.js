@@ -7,14 +7,14 @@ import {
   SET_LOADING,
   CLEAR_MOVIES,
   GET_MOVIE,
-  GET_CREDITS,
+  GET_CREDIT,
 } from "../types";
 
 const MovieState = (props) => {
   const initialState = {
     movies: [],
     movie: {},
-    credits: [],
+    credit: [],
     loading: false,
   };
 
@@ -53,7 +53,7 @@ const MovieState = (props) => {
     https://api.themoviedb.org/3/movie/${id}/credits?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
     `);
 
-    dispatch({ type: GET_CREDITS, payload: res.data });
+    dispatch({ type: GET_CREDIT, payload: res.data.crew });
   };
 
   // Clear Movies
@@ -67,7 +67,7 @@ const MovieState = (props) => {
       value={{
         movies: state.movies,
         movie: state.movie,
-        credits: state.credits,
+        credit: state.credit,
         loading: state.loading,
         searchMovies,
         clearMovies,

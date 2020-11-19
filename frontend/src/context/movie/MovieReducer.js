@@ -3,7 +3,7 @@ import {
   SET_LOADING,
   CLEAR_MOVIES,
   GET_MOVIE,
-  GET_CREDITS,
+  GET_CREDIT,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -21,10 +21,12 @@ export default (state, action) => {
         movie: action.payload,
         loading: false,
       };
-    case GET_CREDITS:
+    case GET_CREDIT:
       return {
         ...state,
-        credits: action.payload,
+        credit: action.payload
+          .filter((crew) => crew.job === "Director")
+          .map((crew) => crew.name),
         loading: false,
       };
     case CLEAR_MOVIES:

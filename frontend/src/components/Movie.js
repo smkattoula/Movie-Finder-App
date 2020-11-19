@@ -5,7 +5,7 @@ import MovieContext from "../context/movie/MovieContext";
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
 
-  const { getMovie, getCredits, loading, movie, credits } = movieContext;
+  const { getMovie, getCredits, loading, movie, credit } = movieContext;
 
   useEffect(() => {
     getMovie(match.params.id);
@@ -14,12 +14,6 @@ const Movie = ({ match }) => {
   }, []);
 
   const { original_title, overview, release_date, poster_path } = movie;
-
-  const { crew } = credits;
-
-  const director = crew.find((crew) => crew.job === "Director");
-
-  console.log(director.name);
 
   return (
     <Fragment>
@@ -44,7 +38,7 @@ const Movie = ({ match }) => {
             <strong>{overview}</strong>
           </h4>
           <h2 className="text-center mt-3">Release Date: {release_date}</h2>
-          <h2 className="text-center mt-3">Director: {director.name} </h2>
+          <h2 className="text-center mt-3">Director: {credit} </h2>
         </CardBody>
       </Card>
     </Fragment>
