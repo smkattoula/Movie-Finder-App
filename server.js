@@ -4,10 +4,13 @@ const connectDB = require("./config/db");
 const app = express();
 
 // Connect Database
-connectDB();
+// connectDB();
 
 // Express Middleware
 app.use(express.json({ extended: false }));
+
+// Define Route
+app.use("/api/movies", require("./routes/api/movies"));
 
 const PORT = process.env.PORT || 5000;
 

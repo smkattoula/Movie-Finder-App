@@ -22,27 +22,45 @@ const Movie = ({ match }) => {
           Back To Search
         </NavLink>
       </Button>
-      <Card>
+      <Card style={movieStyle}>
         <CardBody>
           <h1 className="text-center">{original_title}</h1>
           <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
             width="100%"
-            height="1000px"
+            height="500px"
             alt=""
           />
         </CardBody>
         <CardBody className="text-center mt-3">
           <h2 style={{ textDecoration: "underline" }}>Description</h2>
-          <h4 className="text-center mt-3">
-            <strong>{overview}</strong>
-          </h4>
-          <h2 className="text-center mt-3">Release Date: {release_date}</h2>
-          <h2 className="text-center mt-3">Director: {credit} </h2>
+          <h3 className="text-center mt-3">{overview}</h3>
+          <h2 className="text-center mt-3">
+            Release Date: <span className="h3">{release_date}</span>
+          </h2>
+          <h2 className="text-center mt-3">
+            Director: <span className="h3">{credit}</span>{" "}
+          </h2>
+          <Button
+            color="success"
+            className="fas fa-thumbs-up m-3"
+            style={{ width: "25%" }}
+          ></Button>
+          <Button
+            color="danger"
+            className="fas fa-thumbs-down m-3"
+            style={{ width: "25%" }}
+          ></Button>
         </CardBody>
       </Card>
     </Fragment>
   );
+};
+
+const movieStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gridGap: "1rem",
 };
 
 export default Movie;
