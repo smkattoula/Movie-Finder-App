@@ -1,40 +1,64 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const { check, validationResult } = require("express-validator");
 
 const Movie = require("../../models/Movie");
 
-// Route: PUT api/movies/like/:id
-// Description: Thumbs up a movie
+// Route: POST api/movies
+// Description: Post a movie entry in the database
 // Access: Public
-router.post("/like/:id", async (req, res) => {
+router.post(
+  "/",
+  [check("movie_title", "Movie title is required").not().isEmpty()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { movie_title, thumbs_up, thumbs_down } = req.body;
+
+    try {
+      const newMovie = new Movie({
+        movie_title: movie_title,
+        thumbs_up: thumbs_up,
+        thumbs_down: thumbs_down,
+      });
+
+      const movie = await newMovie.save();
+
+      res.json(movie);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// Route: PUT api/movies/:id
+// Description: Thumbs up or thumbs down a movie
+// Access: Public
+router.put("/:id", async (req, res) => {
   const { movie_title, thumbs_up, thumbs_down } = req.body;
 
-  const collection = await axios.get(
-    `https://api.themoviedb.org/3/collection/${req.params.id}?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US`
-  );
-
-  movie_title = collection.original_title;
+  // Build movie object
+  const movieFields = {};
+  if (movie_title) movieFields.movie_title = movie_title;
+  if (thumbs_up) movieFields.thumbs_up = thumbs_up;
+  if (thumbs_down) movieFields.thumbs_down = thumbs_down;
 
   try {
-    // if (movie) {
-    //   // Update
-    //   movie = await Movie.findByIdAndUpdate(
-    //     { $set: movieFields },
-    //     { new: true }
-    //   );
+    let movie = await Movie.findById(req.params.id);
 
-    //   return res.json(movie);
-    // }
+    if (!movie) return res.status(404).json({ msg: "Movie entry not found" });
 
-    // Create
-    const newMovie = new Movie({
-      movie_title: movie_title,
-      thumbs_up: thumbs_up,
-      thumbs_down: thumbs_down,
-    });
+    movie = await Movie.findByIdAndUpdate(
+      req.params.id,
+      { $set: movieFields },
+      { new: true }
+    );
 
-    const movie = await newMovie.save();
     res.json(movie);
   } catch (error) {
     console.error(error.message);
