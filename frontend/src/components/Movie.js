@@ -17,12 +17,12 @@ const Movie = ({ match }) => {
 
   return (
     <Fragment>
-      <Button color="info">
+      <Button color="info" className="mt-5">
         <NavLink href="/" style={{ color: "white" }}>
           Back To Search
         </NavLink>
       </Button>
-      <Card style={movieStyle}>
+      <Card className="mt-3" style={movieStyle}>
         <CardBody>
           <h1 className="text-center">{original_title}</h1>
           <img
@@ -33,13 +33,21 @@ const Movie = ({ match }) => {
           />
         </CardBody>
         <CardBody className="text-center mt-3">
-          <h2 style={{ textDecoration: "underline" }}>Description</h2>
-          <h3 className="text-center mt-3">{overview}</h3>
+          <h2>Description</h2>
+          <h3 className="text-center mt-3" style={{ fontWeight: "normal" }}>
+            {overview}
+          </h3>
           <h2 className="text-center mt-3">
-            Release Date: <span className="h3">{release_date}</span>
+            Release Date:{" "}
+            <span className="h3" style={{ fontWeight: "normal" }}>
+              {release_date}
+            </span>
           </h2>
           <h2 className="text-center mt-3">
-            Director: <span className="h3">{credit}</span>{" "}
+            Director:{" "}
+            <span className="h3" style={{ fontWeight: "normal" }}>
+              {credit}
+            </span>{" "}
           </h2>
           <Button
             color="success"

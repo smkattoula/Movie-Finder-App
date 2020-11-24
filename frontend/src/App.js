@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
 import Search from "./components/Search";
 import Movies from "./components/Movies";
 import Movie from "./components/Movie";
@@ -15,9 +17,9 @@ const App = () => {
         <div className="App">
           <Navbar />
           <div className="container">
-            <Search />
-            <Movies />
             <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
               <Route exact path="/movie/:id" component={Movie} />
             </Switch>
           </div>
