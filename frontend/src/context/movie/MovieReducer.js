@@ -4,6 +4,7 @@ import {
   CLEAR_MOVIES,
   GET_MOVIE,
   GET_CREDIT,
+  ADD_MOVIE,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -28,6 +29,11 @@ export default (state, action) => {
           .filter((crew) => crew.job === "Director")
           .map((crew) => crew.name),
         loading: false,
+      };
+    case ADD_MOVIE:
+      return {
+        ...state,
+        movieItems: [...state.movieItems, action.payload],
       };
     case CLEAR_MOVIES:
       return {

@@ -5,7 +5,14 @@ import MovieContext from "../context/movie/MovieContext";
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
 
-  const { getMovie, getCredits, loading, movie, credit } = movieContext;
+  const {
+    getMovie,
+    getCredits,
+    addMovie,
+    loading,
+    movie,
+    credit,
+  } = movieContext;
 
   useEffect(() => {
     getMovie(match.params.id);
@@ -14,6 +21,8 @@ const Movie = ({ match }) => {
   }, []);
 
   const { original_title, overview, release_date, poster_path } = movie;
+
+  console.log(addMovie);
 
   return (
     <Fragment>
@@ -32,7 +41,7 @@ const Movie = ({ match }) => {
             alt=""
           />
         </CardBody>
-        <CardBody className="text-center mt-3">
+        <CardBody className="text-center mt-2">
           <h2>Description</h2>
           <h3 className="text-center mt-3" style={{ fontWeight: "normal" }}>
             {overview}
@@ -50,6 +59,7 @@ const Movie = ({ match }) => {
             </span>{" "}
           </h2>
           <Button
+            onSubmit={() => addMovie()}
             color="success"
             className="fas fa-thumbs-up m-3"
             style={{ width: "25%" }}
