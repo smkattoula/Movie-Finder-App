@@ -27,7 +27,7 @@ const MovieState = (props) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&query=${text}&page=1&include_adult=false`
+      `https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/search/movie?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&query=${text}&page=1&include_adult=false`
     );
 
     dispatch({
