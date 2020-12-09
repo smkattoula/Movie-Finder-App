@@ -28,6 +28,9 @@ const AppNavbar = (props) => {
     <Fragment>
       <NavLink style={{ color: "white" }}>Hello {user && user.name}!</NavLink>
       <NavItem>
+        <NavLink href="/watchlist">Watchlist</NavLink>
+      </NavItem>
+      <NavItem>
         <NavLink onClick={onLogout} href="#!">
           <i className="fas fa-sign-out-alt"></i>{" "}
           <span className="hide-sm">Logout</span>
@@ -42,7 +45,7 @@ const AppNavbar = (props) => {
         <NavLink href="/register">Register</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="login">Login</NavLink>
+        <NavLink href="/login">Login</NavLink>
       </NavItem>
     </Fragment>
   );

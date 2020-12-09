@@ -12,6 +12,7 @@ node_modules/
 # production
 /build
 default.json
+Config.js
 
 # misc
 .DS_Store

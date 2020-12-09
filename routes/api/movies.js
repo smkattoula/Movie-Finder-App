@@ -17,13 +17,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { movie_title, thumbs_up, thumbs_down } = req.body;
+    const { movieId, movieTitle, movieImage } = req.body;
 
     try {
       const newMovie = new Movie({
-        movie_title: movie_title,
-        thumbs_up: thumbs_up,
-        thumbs_down: thumbs_down,
+        user: req.user._id,
+        movieId,
+        movieTitle,
+        movieImage,
       });
 
       const movie = await newMovie.save();

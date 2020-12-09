@@ -1,19 +1,25 @@
 const mongoose = require("mongoose");
 
 const MovieSchema = mongoose.Schema({
-  movie_title: {
-    type: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: "user",
   },
-  thumbs_up: {
-    type: Number,
+  movieId: {
+    type: String,
   },
-  thumbs_down: {
-    type: Number,
+  movieTitle: {
+    type: String,
   },
-  date: {
-    type: Date,
-    default: Date.now,
+  movieImage: {
+    type: String,
+  },
+  likes: {
+    type: Boolean,
+  },
+  dislikes: {
+    type: Boolean,
   },
 });
 

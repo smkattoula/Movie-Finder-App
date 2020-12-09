@@ -17,7 +17,7 @@ const MovieState = (props) => {
     movie: {},
     movieItems: [],
     credit: [],
-    loading: false,
+    loading: true,
   };
 
   const [state, dispatch] = useReducer(MovieReducer, initialState);
@@ -41,7 +41,7 @@ const MovieState = (props) => {
     setLoading();
 
     const res = await axios.get(`
-    https://api.themoviedb.org/3/movie/${id}?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
+    https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/movie/${id}?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
     `);
 
     dispatch({ type: GET_MOVIE, payload: res.data });
@@ -52,7 +52,7 @@ const MovieState = (props) => {
     setLoading();
 
     const res = await axios.get(`
-    https://api.themoviedb.org/3/movie/${id}/credits?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
+    https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/movie/${id}/credits?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
     `);
 
     dispatch({ type: GET_CREDIT, payload: res.data.crew });

@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Button, NavLink, Card, CardBody } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
+import AuthContext from "../context/auth/AuthContext";
 
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
+  const authContext = useContext(AuthContext);
 
   const {
     getMovie,
@@ -14,15 +16,18 @@ const Movie = ({ match }) => {
     credit,
   } = movieContext;
 
+  const { loadUser, token } = authContext;
+
   useEffect(() => {
+    if (token) {
+      loadUser();
+    }
     getMovie(match.params.id);
     getCredits(match.params.id);
     // eslint-disable-next-line
   }, []);
 
   const { original_title, overview, release_date, poster_path } = movie;
-
-  console.log(addMovie);
 
   return (
     <Fragment>
@@ -35,7 +40,9 @@ const Movie = ({ match }) => {
         <CardBody>
           <h1 className="text-center">{original_title}</h1>
           <img
-            src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
+            src={
+              poster_path && `https://image.tmdb.org/t/p/w780/${poster_path}`
+            }
             width="100%"
             height="500px"
             alt=""
@@ -58,17 +65,9 @@ const Movie = ({ match }) => {
               {credit}
             </span>{" "}
           </h2>
-          <Button
-            onSubmit={() => addMovie()}
-            color="success"
-            className="fas fa-thumbs-up m-3"
-            style={{ width: "25%" }}
-          ></Button>
-          <Button
-            color="danger"
-            className="fas fa-thumbs-down m-3"
-            style={{ width: "25%" }}
-          ></Button>
+          <Button className="mt-3" color="info" block>
+            Add To Watchlist
+          </Button>
         </CardBody>
       </Card>
     </Fragment>
