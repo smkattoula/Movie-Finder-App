@@ -6,6 +6,21 @@ const { check, validationResult } = require("express-validator");
 
 const Watchlist = require("../../models/Watchlist");
 
+// Route: GET api/movies
+// Description: Get movie watchlist from database
+// Access: Private
+router.get("/", auth, async (req, res) => {
+  try {
+    const watchlist = await Watchlist.find({ user: req.user.id }).sort({
+      date: -1,
+    });
+    res.json(watchlist);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // Route: POST api/movies
 // Description: Post a movie entry in the database
 // Access: Private

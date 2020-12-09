@@ -14,6 +14,7 @@ const AddToWatchlistBtn = (props) => {
 
   const onClick = () => {
     addToWatchlist(watchlist);
+    alert("Movie Added to Watchlist!");
   };
 
   return (

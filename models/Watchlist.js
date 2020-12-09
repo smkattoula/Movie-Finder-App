@@ -21,6 +21,10 @@ const WatchlistSchema = mongoose.Schema({
   dislikes: {
     type: Boolean,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("watchlist", WatchlistSchema);

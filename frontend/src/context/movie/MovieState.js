@@ -8,7 +8,8 @@ import {
   CLEAR_MOVIES,
   GET_MOVIE,
   GET_CREDIT,
-  ADD_MOVIE,
+  GET_MOVIE_WATCHLIST,
+  ADD_MOVIE_WATCHLIST,
   MOVIE_ERROR,
 } from "../types";
 
@@ -18,7 +19,7 @@ const MovieState = (props) => {
     movie: {},
     credit: [],
     watchlist: [],
-    loading: true,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(MovieReducer, initialState);
@@ -59,7 +60,18 @@ const MovieState = (props) => {
     dispatch({ type: GET_CREDIT, payload: res.data.crew });
   };
 
-  // Add movie to database
+  // Get movies from watchlist
+  const getMoviesFromWatchlist = async () => {
+    try {
+      const res = await axios.get("/api/movies");
+
+      dispatch({ type: GET_MOVIE_WATCHLIST, payload: res.data });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
+  // Add movie to watchlist
   const addToWatchlist = async (watchlist) => {
     const config = {
       headers: {
@@ -70,7 +82,7 @@ const MovieState = (props) => {
     try {
       const res = await axios.post("/api/movies", watchlist, config);
 
-      dispatch({ type: ADD_MOVIE, payload: res.data });
+      dispatch({ type: ADD_MOVIE_WATCHLIST, payload: res.data });
     } catch (error) {
       dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
     }
@@ -95,6 +107,7 @@ const MovieState = (props) => {
         clearMovies,
         getMovie,
         getCredits,
+        getMoviesFromWatchlist,
         addToWatchlist,
       }}
     >

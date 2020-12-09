@@ -4,7 +4,8 @@ import {
   CLEAR_MOVIES,
   GET_MOVIE,
   GET_CREDIT,
-  ADD_MOVIE,
+  GET_MOVIE_WATCHLIST,
+  ADD_MOVIE_WATCHLIST,
   MOVIE_ERROR,
 } from "../types";
 
@@ -31,15 +32,23 @@ export default (state, action) => {
           .map((crew) => crew.name),
         loading: false,
       };
-    case ADD_MOVIE:
+    case GET_MOVIE_WATCHLIST:
+      return {
+        ...state,
+        watchlist: action.payload,
+        loading: false,
+      };
+    case ADD_MOVIE_WATCHLIST:
       return {
         ...state,
         watchlist: [...state.watchlist, action.payload],
+        loading: false,
       };
     case MOVIE_ERROR:
       return {
         ...state,
         error: action.payload,
+        loading: false,
       };
     case CLEAR_MOVIES:
       return {
@@ -50,7 +59,7 @@ export default (state, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: false,
+        loading: true,
       };
     default:
       return state;

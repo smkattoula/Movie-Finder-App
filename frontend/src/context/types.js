@@ -1,7 +1,8 @@
 export const SEARCH_MOVIES = "SEARCH_MOVIES";
 export const GET_MOVIE = "GET_MOVIE";
 export const GET_CREDIT = "GET_CREDIT";
-export const ADD_MOVIE = "ADD_MOVIE";
+export const GET_MOVIE_WATCHLIST = "GET_MOVIE_WATCHLIST";
+export const ADD_MOVIE_WATCHLIST = "ADD_MOVIE_WATCHLIST";
 export const MOVIE_ERROR = "MOVIE_ERROR";
 export const CLEAR_MOVIES = "CLEAR_MOVIES";
 export const SET_LOADING = "SET_LOADING";
