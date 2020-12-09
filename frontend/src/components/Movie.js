@@ -2,21 +2,17 @@ import React, { Fragment, useEffect, useContext } from "react";
 import { Button, NavLink, Card, CardBody } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
+import AddToWatchlistBtn from "./AddToWatchlistBtn";
 
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
   const authContext = useContext(AuthContext);
 
-  const {
-    getMovie,
-    getCredits,
-    addMovie,
-    loading,
-    movie,
-    credit,
-  } = movieContext;
+  const { getMovie, getCredits, loading, movie, credit } = movieContext;
 
   const { loadUser, token } = authContext;
+
+  const movieId = match.params.id;
 
   useEffect(() => {
     if (token) {
@@ -65,9 +61,7 @@ const Movie = ({ match }) => {
               {credit}
             </span>{" "}
           </h2>
-          <Button className="mt-3" color="info" block>
-            Add To Watchlist
-          </Button>
+          <AddToWatchlistBtn movieId={movieId} movieInfo={movie} />
         </CardBody>
       </Card>
     </Fragment>

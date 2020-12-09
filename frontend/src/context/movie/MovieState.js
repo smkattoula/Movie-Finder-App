@@ -9,14 +9,15 @@ import {
   GET_MOVIE,
   GET_CREDIT,
   ADD_MOVIE,
+  MOVIE_ERROR,
 } from "../types";
 
 const MovieState = (props) => {
   const initialState = {
     movies: [],
     movie: {},
-    movieItems: [],
     credit: [],
+    watchlist: [],
     loading: true,
   };
 
@@ -59,17 +60,20 @@ const MovieState = (props) => {
   };
 
   // Add movie to database
-  const addMovie = async (id) => {
-    const { data } = await axios.get(`
-    https://api.themoviedb.org/3/movie/${id}?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
-    `);
-
-    dispatch({
-      type: ADD_MOVIE,
-      payload: {
-        movie_title: data.original_title._id,
+  const addToWatchlist = async (watchlist) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
       },
-    });
+    };
+
+    try {
+      const res = await axios.post("/api/movies", watchlist, config);
+
+      dispatch({ type: ADD_MOVIE, payload: res.data });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
   };
 
   // Clear Movies
@@ -85,12 +89,13 @@ const MovieState = (props) => {
         movie: state.movie,
         movieItems: state.movieItems,
         credit: state.credit,
+        watchlist: state.watchlist,
         loading: state.loading,
         searchMovies,
         clearMovies,
         getMovie,
         getCredits,
-        addMovie,
+        addToWatchlist,
       }}
     >
       {props.children}

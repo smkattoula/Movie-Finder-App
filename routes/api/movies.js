@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 const axios = require("axios");
 const { check, validationResult } = require("express-validator");
 
-const Movie = require("../../models/Movie");
+const Watchlist = require("../../models/Watchlist");
 
 // Route: POST api/movies
 // Description: Post a movie entry in the database
-// Access: Public
+// Access: Private
 router.post(
   "/",
-  [check("movie_title", "Movie title is required").not().isEmpty()],
+  [auth, check("movieTitle", "Movie title is required").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -20,8 +21,8 @@ router.post(
     const { movieId, movieTitle, movieImage } = req.body;
 
     try {
-      const newMovie = new Movie({
-        user: req.user._id,
+      const newMovie = new Watchlist({
+        user: req.user.id,
         movieId,
         movieTitle,
         movieImage,
@@ -39,7 +40,7 @@ router.post(
 
 // Route: PUT api/movies/:id
 // Description: Thumbs up or thumbs down a movie
-// Access: Public
+// Access: Private
 router.put("/:id", async (req, res) => {
   const { movie_title, thumbs_up, thumbs_down } = req.body;
 

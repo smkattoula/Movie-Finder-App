@@ -5,6 +5,7 @@ import {
   GET_MOVIE,
   GET_CREDIT,
   ADD_MOVIE,
+  MOVIE_ERROR,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -33,7 +34,12 @@ export default (state, action) => {
     case ADD_MOVIE:
       return {
         ...state,
-        movieItems: [...state.movieItems, action.payload],
+        watchlist: [...state.watchlist, action.payload],
+      };
+    case MOVIE_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case CLEAR_MOVIES:
       return {
