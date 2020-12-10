@@ -43,7 +43,7 @@ const Search = () => {
       </Form>
       {movies.length > 0 && (
         <Button
-          style={{ backgroundColor: "#682860", border: "none" }}
+          style={{ backgroundColor: "#a8a8a8", border: "none" }}
           className="btn btn-block mb-3"
           onClick={clearMovies}
         >

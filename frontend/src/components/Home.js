@@ -6,7 +6,7 @@ import AuthContext from "../context/auth/AuthContext";
 const Home = () => {
   const authContext = useContext(AuthContext);
 
-  const { loadUser, token } = authContext;
+  const { loadUser } = authContext;
 
   useEffect(() => {
     loadUser();

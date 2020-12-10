@@ -20,6 +20,7 @@ const WatchList = ({ match }) => {
   useEffect(() => {
     loadUser();
     getMoviesFromWatchlist();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -35,6 +36,7 @@ const WatchList = ({ match }) => {
                 <Col md={1}>
                   <img
                     src={`https://image.tmdb.org/t/p/w780/${movie.movieImage}`}
+                    alt=""
                     className="img-fluid rounded"
                   />
                 </Col>
