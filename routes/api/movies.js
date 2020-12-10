@@ -53,6 +53,29 @@ router.post(
   }
 );
 
+// Route: DELETE api/movies/:id
+// Description: Delete a movie from the watchlist
+// Access: Private
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    let movie = await Watchlist.findById(req.params.id);
+
+    if (!movie) return res.status(404).json({ msg: "Movie not found" });
+
+    // Validation to check if movie in watchlist belongs to user
+    if (movie.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Not authorized" });
+    }
+
+    await Watchlist.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: "Movie removed" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // Route: PUT api/movies/:id
 // Description: Thumbs up or thumbs down a movie
 // Access: Private
