@@ -17,11 +17,11 @@ const AppNavbar = (props) => {
   const movieContext = useContext(MovieContext);
 
   const { isAuthenticated, logout, user } = authContext;
-  const { clearMovies } = movieContext;
+  const { clearLogout } = movieContext;
 
   const onLogout = () => {
     logout();
-    clearMovies();
+    clearLogout();
   };
 
   const authLinks = (

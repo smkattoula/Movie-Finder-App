@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useContext } from "react";
-import { Button, NavLink, Card, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button, Card, CardBody } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
 import AddToWatchlistBtn from "./AddToWatchlistBtn";
@@ -26,9 +27,9 @@ const Movie = ({ match }) => {
   return (
     <Fragment>
       <Button color="info" className="mt-5">
-        <NavLink href="/" style={{ color: "white" }}>
+        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
           Back To Search
-        </NavLink>
+        </Link>
       </Button>
       <Card className="mt-3" style={movieStyle}>
         <CardBody>

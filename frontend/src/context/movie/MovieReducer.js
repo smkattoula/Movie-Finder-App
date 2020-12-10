@@ -1,13 +1,14 @@
 import {
   SEARCH_MOVIES,
   SET_LOADING,
-  CLEAR_MOVIES,
+  CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
   MOVIE_ERROR,
+  CLEAR_MOVIES,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -63,10 +64,15 @@ export default (state, action) => {
       return {
         ...state,
         movies: [],
+        loading: false,
+      };
+    case CLEAR_LOGOUT:
+      return {
+        ...state,
+        movies: [],
         movie: {},
         credit: [],
         watchlist: [],
-        loading: false,
       };
     case SET_LOADING:
       return {

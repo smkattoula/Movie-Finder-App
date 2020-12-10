@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardBody, CardLink, CardTitle } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Card, CardBody, CardTitle } from "reactstrap";
 
 const MovieItem = ({ movie }) => {
   const { title, poster_path, id } = movie;
@@ -17,7 +18,7 @@ const MovieItem = ({ movie }) => {
             alt=""
           />
           <CardBody>
-            <CardLink href={`/movie/${id}`}>More Details</CardLink>
+            <Link to={`/movie/${id}`}>More Details</Link>
           </CardBody>
         </Card>
       </div>

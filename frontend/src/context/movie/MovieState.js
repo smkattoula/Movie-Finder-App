@@ -5,13 +5,14 @@ import MovieReducer from "./MovieReducer";
 import {
   SEARCH_MOVIES,
   SET_LOADING,
-  CLEAR_MOVIES,
+  CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
   MOVIE_ERROR,
+  CLEAR_MOVIES,
 } from "../types";
 
 const MovieState = (props) => {
@@ -104,8 +105,11 @@ const MovieState = (props) => {
     }
   };
 
-  // Clear Movies
+  // Clear movies state for clear button functionality
   const clearMovies = () => dispatch({ type: CLEAR_MOVIES });
+
+  // Clear state when user logs out
+  const clearLogout = () => dispatch({ type: CLEAR_LOGOUT });
 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -121,6 +125,7 @@ const MovieState = (props) => {
         loading: state.loading,
         searchMovies,
         clearMovies,
+        clearLogout,
         getMovie,
         getCredits,
         getMoviesFromWatchlist,

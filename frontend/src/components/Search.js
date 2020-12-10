@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
 const Search = () => {
   const movieContext = useContext(MovieContext);
+  const { movies, searchMovies, clearMovies } = movieContext;
 
   const [text, setText] = useState("");
 
@@ -12,7 +13,7 @@ const Search = () => {
     if (text === "") {
       alert("Please enter a search term");
     } else {
-      movieContext.searchMovies(text);
+      searchMovies(text);
       setText("");
     }
   };
@@ -33,20 +34,22 @@ const Search = () => {
         </FormGroup>
         <FormGroup>
           <Input
+            style={{ backgroundColor: "#17a2b8", border: "none" }}
             type="submit"
             value="Search"
             className="btn btn-dark btn-block"
           />
         </FormGroup>
       </Form>
-      {/* {movieContext.movies.length > 0 && (
-        <button
-          className="btn btn-light btn-block"
-          onClick={movieContext.clearMovies}
+      {movies.length > 0 && (
+        <Button
+          style={{ backgroundColor: "#682860", border: "none" }}
+          className="btn btn-block mb-3"
+          onClick={clearMovies}
         >
           Clear
-        </button>
-      )} */}
+        </Button>
+      )}
     </div>
   );
 };
