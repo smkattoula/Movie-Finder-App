@@ -10,7 +10,7 @@ const Movie = ({ match }) => {
 
   const { getMovie, getCredits, loading, movie, credit } = movieContext;
 
-  const { loadUser, token } = authContext;
+  const { loadUser } = authContext;
 
   const movieId = match.params.id;
 

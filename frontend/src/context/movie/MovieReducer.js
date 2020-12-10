@@ -6,6 +6,7 @@ import {
   GET_CREDIT,
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
+  DELETE_MOVIE_WATCHLIST,
   MOVIE_ERROR,
 } from "../types";
 
@@ -44,6 +45,14 @@ export default (state, action) => {
         watchlist: [...state.watchlist, action.payload],
         loading: false,
       };
+    case DELETE_MOVIE_WATCHLIST:
+      return {
+        ...state,
+        watchlist: state.watchlist.filter(
+          (movie) => movie._id !== action.payload
+        ),
+        loading: false,
+      };
     case MOVIE_ERROR:
       return {
         ...state,
@@ -54,6 +63,9 @@ export default (state, action) => {
       return {
         ...state,
         movies: [],
+        movie: {},
+        credit: [],
+        watchlist: [],
         loading: false,
       };
     case SET_LOADING:

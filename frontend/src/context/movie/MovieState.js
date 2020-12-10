@@ -10,6 +10,7 @@ import {
   GET_CREDIT,
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
+  DELETE_MOVIE_WATCHLIST,
   MOVIE_ERROR,
 } from "../types";
 
@@ -90,6 +91,19 @@ const MovieState = (props) => {
     }
   };
 
+  // Delete a movie from the watchlist
+  const deleteMovieFromWatchlist = async (id) => {
+    setLoading();
+
+    try {
+      await axios.delete(`/api/movies/${id}`);
+
+      dispatch({ type: DELETE_MOVIE_WATCHLIST, payload: id });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
   // Clear Movies
   const clearMovies = () => dispatch({ type: CLEAR_MOVIES });
 
@@ -111,6 +125,7 @@ const MovieState = (props) => {
         getCredits,
         getMoviesFromWatchlist,
         addToWatchlist,
+        deleteMovieFromWatchlist,
       }}
     >
       {props.children}
