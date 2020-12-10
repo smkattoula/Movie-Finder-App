@@ -62,6 +62,8 @@ const MovieState = (props) => {
 
   // Get movies from watchlist
   const getMoviesFromWatchlist = async () => {
+    setLoading();
+
     try {
       const res = await axios.get("/api/movies");
 
@@ -73,6 +75,8 @@ const MovieState = (props) => {
 
   // Add movie to watchlist
   const addToWatchlist = async (watchlist) => {
+    setLoading();
+
     const config = {
       headers: {
         "Content-Type": "application/json",

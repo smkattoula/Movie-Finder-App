@@ -27,12 +27,12 @@ const App = () => {
             <AppNavbar />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Home} />
+                <PrivateRoute exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/movie/:id" component={Movie} />
-                <Route exact path="/watchlist" component={WatchList} />
+                <PrivateRoute exact path="/movie/:id" component={Movie} />
+                <PrivateRoute exact path="/watchlist" component={WatchList} />
               </Switch>
             </div>
           </div>

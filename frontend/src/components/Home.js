@@ -9,9 +9,8 @@ const Home = () => {
   const { loadUser, token } = authContext;
 
   useEffect(() => {
-    if (token) {
-      loadUser();
-    }
+    loadUser();
+
     // eslint-disable-next-line
   }, []);
 
