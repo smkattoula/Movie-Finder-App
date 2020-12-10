@@ -15,9 +15,7 @@ const Movie = ({ match }) => {
   const movieId = match.params.id;
 
   useEffect(() => {
-    if (token) {
-      loadUser();
-    }
+    loadUser();
     getMovie(match.params.id);
     getCredits(match.params.id);
     // eslint-disable-next-line

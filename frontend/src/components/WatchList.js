@@ -12,9 +12,7 @@ const WatchList = () => {
   const { loadUser, token } = authContext;
 
   useEffect(() => {
-    if (token) {
-      loadUser();
-    }
+    loadUser();
     getMoviesFromWatchlist();
   }, []);
 
