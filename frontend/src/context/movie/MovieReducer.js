@@ -7,6 +7,8 @@ import {
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  UPDATE_LIKES,
+  UPDATE_UNLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
 } from "../types";
@@ -51,6 +53,26 @@ export default (state, action) => {
         ...state,
         watchlist: state.watchlist.filter(
           (movie) => movie._id !== action.payload
+        ),
+        loading: false,
+      };
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        watchlist: state.watchlist.map((movie) =>
+          movie._id === action.payload.id
+            ? { ...state.watchlist, likes: action.payload.likes }
+            : state.watchlist
+        ),
+        loading: false,
+      };
+    case UPDATE_UNLIKES:
+      return {
+        ...state,
+        watchlist: state.watchlist.map((movie) =>
+          movie._id === action.payload.id
+            ? { ...state.watchlist, unlikes: action.payload.unlikes }
+            : state.watchlist
         ),
         loading: false,
       };

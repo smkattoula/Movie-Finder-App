@@ -4,6 +4,7 @@ import { Button, Card, CardBody } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
 import AddToWatchlistBtn from "./AddToWatchlistBtn";
+import ThumbsUpDownBtn from "./ThumbsUpDownBtns";
 
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
@@ -61,6 +62,7 @@ const Movie = ({ match }) => {
             </span>{" "}
           </h2>
           <AddToWatchlistBtn movieId={movieId} movieInfo={movie} />
+          <ThumbsUpDownBtn movieId={movieId} movieInfo={movie} />
         </CardBody>
       </Card>
     </Fragment>

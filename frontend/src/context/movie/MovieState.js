@@ -11,6 +11,8 @@ import {
   GET_MOVIE_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  UPDATE_LIKES,
+  UPDATE_UNLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
 } from "../types";
@@ -21,6 +23,7 @@ const MovieState = (props) => {
     movie: {},
     credit: [],
     watchlist: [],
+    rating: [],
     loading: false,
   };
 
@@ -105,6 +108,32 @@ const MovieState = (props) => {
     }
   };
 
+  // Add likes for a movie
+  const addLike = (id) => async (dispatch) => {
+    setLoading();
+
+    try {
+      const res = await axios.put(`/api/movies/like/${id}`);
+
+      dispatch({ type: UPDATE_LIKES, payload: { id, likes: res.data } });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
+  // Remove likes from a movie
+  const removeLike = (id) => async (dispatch) => {
+    setLoading();
+
+    try {
+      const res = await axios.put(`/api/movies/unlike/${id}`);
+
+      dispatch({ type: UPDATE_UNLIKES, payload: { id, unlikes: res.data } });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
   // Clear movies state for clear button functionality
   const clearMovies = () => dispatch({ type: CLEAR_MOVIES });
 
@@ -122,6 +151,7 @@ const MovieState = (props) => {
         movieItems: state.movieItems,
         credit: state.credit,
         watchlist: state.watchlist,
+        rating: state.rating,
         loading: state.loading,
         searchMovies,
         clearMovies,
@@ -131,6 +161,8 @@ const MovieState = (props) => {
         getMoviesFromWatchlist,
         addToWatchlist,
         deleteMovieFromWatchlist,
+        addLike,
+        removeLike,
       }}
     >
       {props.children}
