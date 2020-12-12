@@ -15,12 +15,22 @@ const WatchlistSchema = mongoose.Schema({
   movieImage: {
     type: String,
   },
-  likes: {
-    type: Boolean,
-  },
-  dislikes: {
-    type: Boolean,
-  },
+  likes: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    },
+  ],
+  unlikes: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,
