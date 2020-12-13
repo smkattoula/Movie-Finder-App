@@ -4,21 +4,28 @@ import MovieContext from "../context/movie/MovieContext";
 
 const ThumbsUpDownBtn = (props) => {
   const movieContext = useContext(MovieContext);
-  const { addLike, removeLike } = movieContext;
+  const { addLike, removeLike, postRating, ratings } = movieContext;
 
-  const watchlist = {
+  const rating = {
     movieId: props.movieId,
     movieTitle: props.movieInfo.original_title,
-    movieImage: props.movieInfo.poster_path,
   };
 
   const onClickAddLike = () => {
-    addLike(watchlist._id);
-    console.log(watchlist);
+    postRating(rating);
+    // if (ratings === null) {
+    //   postRating(rating);
+    //   addLike();
+    //   console.log(ratings);
+    // } else {
+    //   addLike(rating);
+    //   console.log(ratings);
+    // }
   };
 
   const onClickRemoveLike = () => {
-    removeLike(watchlist.movieId);
+    addLike(rating._id);
+    console.log(ratings);
   };
 
   return (

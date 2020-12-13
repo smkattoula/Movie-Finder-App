@@ -21,6 +21,30 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Route: POST api/ratings
+// Description: Post movie rating in database
+// Access: Private
+router.post("/", auth, async (req, res) => {
+  try {
+    const { movieId, movieTitle, likes, unlikes } = req.body;
+
+    const newRating = new Rating({
+      user: req.user.id,
+      movieId,
+      movieTitle,
+      likes,
+      unlikes,
+    });
+
+    const rating = await newRating.save();
+
+    res.json(rating);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server Error");
+  }
+});
+
 // Route: PUT api/ratings/like/:id
 // Description: Like a movie
 // Access: Private

@@ -10,9 +10,18 @@ const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
   const authContext = useContext(AuthContext);
 
-  const { getMovie, getCredits, loading, movie, credit } = movieContext;
+  const {
+    getMovie,
+    getCredits,
+    loading,
+    movie,
+    credit,
+    getRating,
+  } = movieContext;
 
   const { loadUser } = authContext;
+
+  const { original_title, overview, release_date, poster_path } = movie;
 
   const movieId = match.params.id;
 
@@ -20,10 +29,9 @@ const Movie = ({ match }) => {
     loadUser();
     getMovie(match.params.id);
     getCredits(match.params.id);
+    getRating();
     // eslint-disable-next-line
   }, []);
-
-  const { original_title, overview, release_date, poster_path } = movie;
 
   return (
     <Fragment>

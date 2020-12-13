@@ -4,11 +4,13 @@ import {
   CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
-  GET_MOVIE_WATCHLIST,
+  GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  GET_RATING,
+  POST_RATING,
   UPDATE_LIKES,
-  UPDATE_UNLIKES,
+  UPDATE_DISLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
 } from "../types";
@@ -36,7 +38,7 @@ export default (state, action) => {
           .map((crew) => crew.name),
         loading: false,
       };
-    case GET_MOVIE_WATCHLIST:
+    case GET_MOVIES_WATCHLIST:
       return {
         ...state,
         watchlist: action.payload,
@@ -56,6 +58,32 @@ export default (state, action) => {
         ),
         loading: false,
       };
+    case GET_RATING:
+      return {
+        ...state,
+        ratings: state.ratings.map((x) => x._id === action.payload._id),
+        loading: false,
+      };
+    case POST_RATING:
+      const rating = action.payload;
+
+      const existRating = state.ratings.find((x) => x._id === rating._id);
+
+      if (existRating) {
+        return {
+          ...state,
+          ratings: state.ratings.map((x) =>
+            x._id === existRating._id ? rating : x
+          ),
+          loading: false,
+        };
+      } else {
+        return {
+          ...state,
+          ratings: [...state.ratings, rating],
+          loading: false,
+        };
+      }
     case UPDATE_LIKES:
       return {
         ...state,
@@ -66,12 +94,12 @@ export default (state, action) => {
         ),
         loading: false,
       };
-    case UPDATE_UNLIKES:
+    case UPDATE_DISLIKES:
       return {
         ...state,
         watchlist: state.watchlist.map((movie) =>
           movie._id === action.payload.id
-            ? { ...state.watchlist, unlikes: action.payload.unlikes }
+            ? { ...state.watchlist, dislikes: action.payload.dislikes }
             : state.watchlist
         ),
         loading: false,

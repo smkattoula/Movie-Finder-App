@@ -8,11 +8,13 @@ import {
   CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
-  GET_MOVIE_WATCHLIST,
+  GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  GET_RATING,
+  POST_RATING,
   UPDATE_LIKES,
-  UPDATE_UNLIKES,
+  UPDATE_DISLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
 } from "../types";
@@ -23,7 +25,7 @@ const MovieState = (props) => {
     movie: {},
     credit: [],
     watchlist: [],
-    rating: [],
+    ratings: [],
     loading: false,
   };
 
@@ -70,7 +72,7 @@ const MovieState = (props) => {
     try {
       const res = await axios.get("/api/movies");
 
-      dispatch({ type: GET_MOVIE_WATCHLIST, payload: res.data });
+      dispatch({ type: GET_MOVIES_WATCHLIST, payload: res.data });
     } catch (error) {
       dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
     }
@@ -108,6 +110,38 @@ const MovieState = (props) => {
     }
   };
 
+  // Get rating for a movie
+  const getRating = async () => {
+    setLoading();
+
+    try {
+      const res = await axios.get("/api/ratings");
+
+      dispatch({ type: GET_RATING, payload: res.data });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
+  // Post rating for a movie
+  const postRating = async (rating) => {
+    setLoading();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post("/api/ratings", rating, config);
+
+      dispatch({ type: POST_RATING, payload: res.data });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
   // Add likes for a movie
   const addLike = (id) => async (dispatch) => {
     setLoading();
@@ -128,7 +162,7 @@ const MovieState = (props) => {
     try {
       const res = await axios.put(`/api/movies/unlike/${id}`);
 
-      dispatch({ type: UPDATE_UNLIKES, payload: { id, unlikes: res.data } });
+      dispatch({ type: UPDATE_DISLIKES, payload: { id, unlikes: res.data } });
     } catch (error) {
       dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
     }
@@ -151,7 +185,7 @@ const MovieState = (props) => {
         movieItems: state.movieItems,
         credit: state.credit,
         watchlist: state.watchlist,
-        rating: state.rating,
+        ratings: state.ratings,
         loading: state.loading,
         searchMovies,
         clearMovies,
@@ -161,6 +195,8 @@ const MovieState = (props) => {
         getMoviesFromWatchlist,
         addToWatchlist,
         deleteMovieFromWatchlist,
+        getRating,
+        postRating,
         addLike,
         removeLike,
       }}
