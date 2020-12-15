@@ -61,46 +61,32 @@ export default (state, action) => {
     case GET_RATING:
       return {
         ...state,
-        ratings: state.ratings.map((x) => x._id === action.payload._id),
+        ratings: action.payload,
         loading: false,
       };
     case POST_RATING:
-      const rating = action.payload;
-
-      const existRating = state.ratings.find((x) => x._id === rating._id);
-
-      if (existRating) {
-        return {
-          ...state,
-          ratings: state.ratings.map((x) =>
-            x._id === existRating._id ? rating : x
-          ),
-          loading: false,
-        };
-      } else {
-        return {
-          ...state,
-          ratings: [...state.ratings, rating],
-          loading: false,
-        };
-      }
+      return {
+        ...state,
+        ratings: [...state.ratings, action.payload],
+        loading: false,
+      };
     case UPDATE_LIKES:
       return {
         ...state,
-        watchlist: state.watchlist.map((movie) =>
-          movie._id === action.payload.id
-            ? { ...state.watchlist, likes: action.payload.likes }
-            : state.watchlist
+        ratings: state.ratings.map((movie) =>
+          movie.movieId === action.payload.id
+            ? action.payload.likes
+            : state.ratings
         ),
         loading: false,
       };
     case UPDATE_DISLIKES:
       return {
         ...state,
-        watchlist: state.watchlist.map((movie) =>
-          movie._id === action.payload.id
-            ? { ...state.watchlist, dislikes: action.payload.dislikes }
-            : state.watchlist
+        ratings: state.ratings.map((movie) =>
+          movie.movieId === action.payload.id
+            ? action.payload.unlikes
+            : state.ratings
         ),
         loading: false,
       };

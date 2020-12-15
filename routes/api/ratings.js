@@ -7,11 +7,26 @@ const { check, validationResult } = require("express-validator");
 const Rating = require("../../models/Rating");
 
 // Route: GET api/ratings
-// Description: Get movie watchlist from database
+// Description: Get movie ratings from database
 // Access: Private
 router.get("/", auth, async (req, res) => {
   try {
     const rating = await Rating.find({ user: req.user.id }).sort({
+      date: -1,
+    });
+    res.json(rating);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Route: GET api/ratings/:id
+// Description: Get a single movie rating from database
+// Access: Private
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const rating = await Rating.find({ movieId: req.params.id }).sort({
       date: -1,
     });
     res.json(rating);
@@ -29,7 +44,6 @@ router.post("/", auth, async (req, res) => {
     const { movieId, movieTitle, likes, unlikes } = req.body;
 
     const newRating = new Rating({
-      user: req.user.id,
       movieId,
       movieTitle,
       likes,
@@ -50,7 +64,9 @@ router.post("/", auth, async (req, res) => {
 // Access: Private
 router.put("/like/:id", auth, async (req, res) => {
   try {
-    const rating = await Rating.findById(req.params.id);
+    const rating = await Rating.findOne({
+      movieId: req.params.id,
+    });
 
     const removeIndex = rating.likes
       .map((like) => like.user.toString())
@@ -83,7 +99,7 @@ router.put("/like/:id", auth, async (req, res) => {
 // Access: Private
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
-    const rating = await Rating.findById(req.params.id);
+    const rating = await Rating.findOne({ movieId: req.params.id });
 
     const removeIndex = rating.unlikes
       .map((unlike) => unlike.user.toString())

@@ -12,7 +12,11 @@ const ThumbsUpDownBtn = (props) => {
   };
 
   const onClickAddLike = () => {
-    postRating(rating);
+    if (ratings.length === 0) {
+      postRating(rating);
+    } else {
+      addLike(props.movieId);
+    }
     // if (ratings === null) {
     //   postRating(rating);
     //   addLike();
@@ -24,8 +28,7 @@ const ThumbsUpDownBtn = (props) => {
   };
 
   const onClickRemoveLike = () => {
-    addLike(rating._id);
-    console.log(ratings);
+    removeLike(props.movieId);
   };
 
   return (

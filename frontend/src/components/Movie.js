@@ -29,7 +29,7 @@ const Movie = ({ match }) => {
     loadUser();
     getMovie(match.params.id);
     getCredits(match.params.id);
-    getRating();
+    getRating(match.params.id);
     // eslint-disable-next-line
   }, []);
 

@@ -111,11 +111,11 @@ const MovieState = (props) => {
   };
 
   // Get rating for a movie
-  const getRating = async () => {
+  const getRating = async (id) => {
     setLoading();
 
     try {
-      const res = await axios.get("/api/ratings");
+      const res = await axios.get(`/api/ratings/${id}`);
 
       dispatch({ type: GET_RATING, payload: res.data });
     } catch (error) {
@@ -143,11 +143,11 @@ const MovieState = (props) => {
   };
 
   // Add likes for a movie
-  const addLike = (id) => async (dispatch) => {
+  const addLike = async (id) => {
     setLoading();
 
     try {
-      const res = await axios.put(`/api/movies/like/${id}`);
+      const res = await axios.put(`/api/ratings/like/${id}`);
 
       dispatch({ type: UPDATE_LIKES, payload: { id, likes: res.data } });
     } catch (error) {
@@ -156,11 +156,11 @@ const MovieState = (props) => {
   };
 
   // Remove likes from a movie
-  const removeLike = (id) => async (dispatch) => {
+  const removeLike = async (id) => {
     setLoading();
 
     try {
-      const res = await axios.put(`/api/movies/unlike/${id}`);
+      const res = await axios.put(`/api/ratings/unlike/${id}`);
 
       dispatch({ type: UPDATE_DISLIKES, payload: { id, unlikes: res.data } });
     } catch (error) {
