@@ -9,12 +9,12 @@ const Rating = require("../../models/Rating");
 // Route: GET api/ratings
 // Description: Get movie ratings from database
 // Access: Private
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const rating = await Rating.find({ user: req.user.id }).sort({
+    const ratings = await Rating.find({}).sort({
       date: -1,
     });
-    res.json(rating);
+    res.json(ratings);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
@@ -24,7 +24,7 @@ router.get("/", auth, async (req, res) => {
 // Route: GET api/ratings/:id
 // Description: Get a single movie rating from database
 // Access: Private
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const rating = await Rating.find({ movieId: req.params.id }).sort({
       date: -1,

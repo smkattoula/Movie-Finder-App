@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, CardTitle } from "reactstrap";
+import { Card, CardBody, CardTitle, Button } from "reactstrap";
 
 const MovieItem = ({ movie }) => {
   const { title, poster_path, id } = movie;
@@ -18,7 +18,11 @@ const MovieItem = ({ movie }) => {
             alt=""
           />
           <CardBody>
-            <Link to={`/movie/${id}`}>More Details</Link>
+            <Link to={`/movie/${id}`}>
+              <Button style={{ backgroundColor: "#17a2b8", border: "none" }}>
+                More Details
+              </Button>
+            </Link>
           </CardBody>
         </Card>
       </div>

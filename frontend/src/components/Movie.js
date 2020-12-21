@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useContext } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, CardBody } from "reactstrap";
+import { Button, Card, CardBody, Spinner } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
 import AddToWatchlistBtn from "./AddToWatchlistBtn";
@@ -9,6 +9,9 @@ import ThumbsUpDownBtn from "./ThumbsUpDownBtns";
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
   const authContext = useContext(AuthContext);
+
+  const [alertWatchlist, setAlertWatchlist] = useState("");
+  const [alertRating, setAlertRating] = useState("");
 
   const {
     getMovie,
@@ -19,7 +22,7 @@ const Movie = ({ match }) => {
     getRating,
   } = movieContext;
 
-  const { loadUser } = authContext;
+  const { loadUser, isAuthenticated } = authContext;
 
   const { original_title, overview, release_date, poster_path } = movie;
 
@@ -27,14 +30,24 @@ const Movie = ({ match }) => {
 
   useEffect(() => {
     loadUser();
+
     getMovie(match.params.id);
     getCredits(match.params.id);
     getRating(match.params.id);
     // eslint-disable-next-line
   }, []);
 
+  if (loading)
+    <Spinner
+      color="secondary"
+      size="lg"
+      style={{ margin: "auto", display: "block" }}
+    />;
+
   return (
     <Fragment>
+      <div className="mt-3">{alertWatchlist}</div>
+      <div className="mt-3">{alertRating}</div>
       <Button color="info" className="mt-5">
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>
           Back To Search
@@ -44,9 +57,7 @@ const Movie = ({ match }) => {
         <CardBody>
           <h1 className="text-center">{original_title}</h1>
           <img
-            src={
-              poster_path && `https://image.tmdb.org/t/p/w780/${poster_path}`
-            }
+            src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
             width="100%"
             height="500px"
             alt=""
@@ -69,8 +80,18 @@ const Movie = ({ match }) => {
               {credit}
             </span>{" "}
           </h2>
-          <AddToWatchlistBtn movieId={movieId} movieInfo={movie} />
-          <ThumbsUpDownBtn movieId={movieId} movieInfo={movie} />
+          <AddToWatchlistBtn
+            movieId={movieId}
+            movieInfo={movie}
+            setAlertWatchlist={setAlertWatchlist}
+            isAuthenticated={isAuthenticated}
+          />
+          <ThumbsUpDownBtn
+            movieId={movieId}
+            movieInfo={movie}
+            setAlertRating={setAlertRating}
+            isAuthenticated={isAuthenticated}
+          />
         </CardBody>
       </Card>
     </Fragment>

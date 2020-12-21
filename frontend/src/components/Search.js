@@ -1,17 +1,25 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input, Alert } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
+// import AlertContext from "../context/alert/AlertContext";
 
 const Search = () => {
   const movieContext = useContext(MovieContext);
+  // const alertContext = useContext(AlertContext);
+
   const { movies, searchMovies, clearMovies } = movieContext;
+  // const { setAlert } = alertContext;
 
   const [text, setText] = useState("");
+  const [alert, setAlert] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (text === "") {
-      alert("Please enter a search term");
+      setAlert(<Alert color="danger">Please enter a search term</Alert>);
+      setTimeout(() => {
+        setAlert();
+      }, 5000);
     } else {
       searchMovies(text);
       setText("");
@@ -22,6 +30,7 @@ const Search = () => {
 
   return (
     <div className="mt-3">
+      {alert}
       <Form onSubmit={onSubmit}>
         <FormGroup>
           <Input

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Spinner } from "reactstrap";
 import MovieItem from "./MovieItem";
 import MovieContext from "../context/movie/MovieContext";
 
@@ -7,13 +8,23 @@ const Movies = () => {
 
   const { loading, movies } = movieContext;
 
-  return (
-    <div style={movieStyle}>
-      {movies.map((movie) => (
-        <MovieItem key={movie.id} movie={movie} />
-      ))}
-    </div>
-  );
+  if (loading) {
+    return (
+      <Spinner
+        color="secondary"
+        size="lg"
+        style={{ margin: "auto", display: "block" }}
+      />
+    );
+  } else {
+    return (
+      <div style={movieStyle}>
+        {movies.map((movie) => (
+          <MovieItem key={movie.id} movie={movie} />
+        ))}
+      </div>
+    );
+  }
 };
 
 const movieStyle = {

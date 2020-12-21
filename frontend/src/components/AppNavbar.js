@@ -26,9 +26,9 @@ const AppNavbar = (props) => {
 
   const authLinks = (
     <Fragment>
-      <NavLink style={{ color: "white" }}>Hello {user && user.name}!</NavLink>
+      <NavLink style={{ color: "white" }}>Hello, {user && user.name}!</NavLink>
       <NavItem>
-        <NavLink href="/watchlist">Watchlist</NavLink>
+        <NavLink href="/watchlist">My Watchlist</NavLink>
       </NavItem>
       <NavItem>
         <NavLink onClick={onLogout} href="#!">

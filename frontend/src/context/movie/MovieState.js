@@ -11,6 +11,7 @@ import {
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  GET_RATINGS,
   GET_RATING,
   POST_RATING,
   UPDATE_LIKES,
@@ -110,7 +111,20 @@ const MovieState = (props) => {
     }
   };
 
-  // Get rating for a movie
+  // Get all available ratings for movies
+  const getRatings = async () => {
+    setLoading();
+
+    try {
+      const res = await axios.get(`/api/ratings`);
+
+      dispatch({ type: GET_RATINGS, payload: res.data });
+    } catch (error) {
+      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
+    }
+  };
+
+  // Get single available rating for a movie
   const getRating = async (id) => {
     setLoading();
 
@@ -195,6 +209,7 @@ const MovieState = (props) => {
         getMoviesFromWatchlist,
         addToWatchlist,
         deleteMovieFromWatchlist,
+        getRatings,
         getRating,
         postRating,
         addLike,

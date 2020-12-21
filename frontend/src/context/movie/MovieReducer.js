@@ -7,6 +7,7 @@ import {
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
+  GET_RATINGS,
   GET_RATING,
   POST_RATING,
   UPDATE_LIKES,
@@ -58,6 +59,7 @@ export default (state, action) => {
         ),
         loading: false,
       };
+    case GET_RATINGS:
     case GET_RATING:
       return {
         ...state,
