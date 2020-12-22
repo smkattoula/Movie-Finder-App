@@ -5,9 +5,9 @@ import MovieReducer from "./MovieReducer";
 import {
   SEARCH_MOVIES,
   SET_LOADING,
-  CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
+  GET_FEATURED_MOVIES,
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
@@ -18,6 +18,8 @@ import {
   UPDATE_DISLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
+  CLEAR_LOGOUT,
+  CLEAR_FEATURED_MOVIES,
 } from "../types";
 
 const MovieState = (props) => {
@@ -25,6 +27,7 @@ const MovieState = (props) => {
     movies: [],
     movie: {},
     credit: [],
+    featured: [],
     watchlist: [],
     ratings: [],
     loading: false,
@@ -66,6 +69,17 @@ const MovieState = (props) => {
     dispatch({ type: GET_CREDIT, payload: res.data.crew });
   };
 
+  // Get Featured Movies
+  const getFeaturedMovies = async () => {
+    setLoading();
+
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&page=1`
+    );
+
+    dispatch({ type: GET_FEATURED_MOVIES, payload: res.data.results });
+  };
+
   // Get movies from watchlist
   const getMoviesFromWatchlist = async () => {
     setLoading();
@@ -80,7 +94,7 @@ const MovieState = (props) => {
   };
 
   // Add movie to watchlist
-  const addToWatchlist = async (watchlist) => {
+  const addMovieToWatchlist = async (watchlist) => {
     setLoading();
 
     const config = {
@@ -185,6 +199,9 @@ const MovieState = (props) => {
   // Clear movies state for clear button functionality
   const clearMovies = () => dispatch({ type: CLEAR_MOVIES });
 
+  // Clear featured movies state
+  const clearFeaturedMovies = () => dispatch({ type: CLEAR_FEATURED_MOVIES });
+
   // Clear state when user logs out
   const clearLogout = () => dispatch({ type: CLEAR_LOGOUT });
 
@@ -198,16 +215,19 @@ const MovieState = (props) => {
         movie: state.movie,
         movieItems: state.movieItems,
         credit: state.credit,
+        featured: state.featured,
         watchlist: state.watchlist,
         ratings: state.ratings,
         loading: state.loading,
         searchMovies,
         clearMovies,
+        clearFeaturedMovies,
         clearLogout,
         getMovie,
         getCredits,
+        getFeaturedMovies,
         getMoviesFromWatchlist,
-        addToWatchlist,
+        addMovieToWatchlist,
         deleteMovieFromWatchlist,
         getRatings,
         getRating,

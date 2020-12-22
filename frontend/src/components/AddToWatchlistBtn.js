@@ -4,7 +4,7 @@ import MovieContext from "../context/movie/MovieContext";
 
 const AddToWatchlistBtn = (props) => {
   const movieContext = useContext(MovieContext);
-  const { addToWatchlist } = movieContext;
+  const { addMovieToWatchlist } = movieContext;
 
   const watchlist = {
     movieId: props.movieId,
@@ -14,7 +14,7 @@ const AddToWatchlistBtn = (props) => {
 
   const onClick = () => {
     if (props.isAuthenticated === true) {
-      addToWatchlist(watchlist);
+      addMovieToWatchlist(watchlist);
       props.setAlertWatchlist(
         <Alert color="success">Movie added to watchlist!</Alert>
       );

@@ -19,6 +19,7 @@ const Movie = ({ match }) => {
     loading,
     movie,
     credit,
+    ratings,
     getRating,
   } = movieContext;
 
@@ -92,6 +93,7 @@ const Movie = ({ match }) => {
               <ThumbsUpDownBtn
                 movieId={movieId}
                 movieInfo={movie}
+                ratings={ratings}
                 setAlertRating={setAlertRating}
                 isAuthenticated={isAuthenticated}
               />

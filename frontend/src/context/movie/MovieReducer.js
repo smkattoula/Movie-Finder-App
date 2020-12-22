@@ -1,9 +1,9 @@
 import {
   SEARCH_MOVIES,
   SET_LOADING,
-  CLEAR_LOGOUT,
   GET_MOVIE,
   GET_CREDIT,
+  GET_FEATURED_MOVIES,
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
@@ -14,6 +14,8 @@ import {
   UPDATE_DISLIKES,
   MOVIE_ERROR,
   CLEAR_MOVIES,
+  CLEAR_FEATURED_MOVIES,
+  CLEAR_LOGOUT,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -37,6 +39,12 @@ export default (state, action) => {
         credit: action.payload
           .filter((crew) => crew.job === "Director")
           .map((crew) => crew.name),
+        loading: false,
+      };
+    case GET_FEATURED_MOVIES:
+      return {
+        ...state,
+        featured: action.payload,
         loading: false,
       };
     case GET_MOVIES_WATCHLIST:
@@ -102,6 +110,12 @@ export default (state, action) => {
       return {
         ...state,
         movies: [],
+        loading: false,
+      };
+    case CLEAR_FEATURED_MOVIES:
+      return {
+        ...state,
+        featured: [],
         loading: false,
       };
     case CLEAR_LOGOUT:

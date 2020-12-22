@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import Search from "../components/Search";
 import Movies from "../components/Movies";
+import FeaturedMovies from "../components/FeaturedMovies";
 import AuthContext from "../context/auth/AuthContext";
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
     <Fragment>
       <Search />
       <Movies />
+      <FeaturedMovies />
     </Fragment>
   );
 };

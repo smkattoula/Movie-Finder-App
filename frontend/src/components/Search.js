@@ -5,7 +5,13 @@ import MovieContext from "../context/movie/MovieContext";
 const Search = () => {
   const movieContext = useContext(MovieContext);
 
-  const { movies, searchMovies, clearMovies } = movieContext;
+  const {
+    movies,
+    searchMovies,
+    clearMovies,
+    getFeaturedMovies,
+    clearFeaturedMovies,
+  } = movieContext;
 
   const [text, setText] = useState("");
   const [alert, setAlert] = useState("");
@@ -18,12 +24,18 @@ const Search = () => {
         setAlert();
       }, 5000);
     } else {
+      clearFeaturedMovies();
       searchMovies(text);
       setText("");
     }
   };
 
   const onChange = (e) => setText(e.target.value);
+
+  const onClear = () => {
+    clearMovies();
+    getFeaturedMovies();
+  };
 
   return (
     <div className="mt-3">
@@ -51,7 +63,7 @@ const Search = () => {
         <Button
           style={{ backgroundColor: "#a8a8a8", border: "none" }}
           className="btn btn-block mb-3"
-          onClick={clearMovies}
+          onClick={onClear}
         >
           Clear
         </Button>

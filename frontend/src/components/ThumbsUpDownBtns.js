@@ -2,50 +2,58 @@ import React, { useContext } from "react";
 import { Button, Alert } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
-const ThumbsUpDownBtn = (props) => {
+const ThumbsUpDownBtn = ({
+  isAuthenticated,
+  setAlertRating,
+  movieId,
+  movieInfo,
+  ratings,
+}) => {
   const movieContext = useContext(MovieContext);
-  const { addLike, removeLike, postRating, ratings } = movieContext;
+  const { addLike, removeLike, postRating, getRating } = movieContext;
 
   const rating = {
-    movieId: props.movieId,
-    movieTitle: props.movieInfo.original_title,
+    movieId: movieId,
+    movieTitle: movieInfo.original_title,
   };
 
   const onClickAddLike = () => {
-    if (props.isAuthenticated === false) {
-      props.setAlertRating(
+    if (isAuthenticated === false) {
+      setAlertRating(
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       setTimeout(() => {
-        props.setAlertRating();
+        setAlertRating();
       }, 5000);
     }
 
     // eslint-disable-next-line
     if (ratings.length == 0) {
       postRating(rating);
-      addLike(props.movieId);
+      getRating(movieId);
+      addLike(movieId);
     } else {
-      addLike(props.movieId);
+      addLike(movieId);
     }
   };
 
   const onClickRemoveLike = () => {
-    if (props.isAuthenticated === false) {
-      props.setAlertRating(
+    if (isAuthenticated === false) {
+      setAlertRating(
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       setTimeout(() => {
-        props.setAlertRating();
+        setAlertRating();
       }, 5000);
     }
 
     // eslint-disable-next-line
     if (ratings.length == 0) {
       postRating(rating);
-      removeLike(props.movieId);
+      getRating(movieId);
+      removeLike(movieId);
     } else {
-      removeLike(props.movieId);
+      removeLike(movieId);
     }
   };
 
