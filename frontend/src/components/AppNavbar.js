@@ -8,11 +8,10 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 import AuthContext from "../context/auth/AuthContext";
 import MovieContext from "../context/movie/MovieContext";
 
-const AppNavbar = (props) => {
+const AppNavbar = () => {
   const authContext = useContext(AuthContext);
   const movieContext = useContext(MovieContext);
 
@@ -31,7 +30,7 @@ const AppNavbar = (props) => {
         <NavLink href="/watchlist">My Watchlist</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink onClick={onLogout} href="#!">
+        <NavLink onClick={onLogout} href="/">
           <i className="fas fa-sign-out-alt"></i>{" "}
           <span className="hide-sm">Logout</span>
         </NavLink>
@@ -57,7 +56,9 @@ const AppNavbar = (props) => {
   return (
     <div>
       <Navbar color="info" dark expand="md">
-        <NavbarBrand href="/">Movie Finder</NavbarBrand>
+        <NavbarBrand href="/">
+          <i className="fas fa-film"></i> Movie Finder
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

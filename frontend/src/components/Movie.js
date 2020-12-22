@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, CardBody, Spinner } from "reactstrap";
+import { Button, Card, CardBody, Spinner, Col, Row } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
 import AddToWatchlistBtn from "./AddToWatchlistBtn";
@@ -30,7 +30,6 @@ const Movie = ({ match }) => {
 
   useEffect(() => {
     loadUser();
-
     getMovie(match.params.id);
     getCredits(match.params.id);
     getRating(match.params.id);
@@ -53,55 +52,55 @@ const Movie = ({ match }) => {
           Back To Search
         </Link>
       </Button>
-      <Card className="mt-3" style={movieStyle}>
-        <CardBody>
-          <h1 className="text-center">{original_title}</h1>
-          <img
-            src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
-            width="100%"
-            height="500px"
-            alt=""
-          />
-        </CardBody>
-        <CardBody className="text-center mt-2">
-          <h2>Description</h2>
-          <h3 className="text-center mt-3" style={{ fontWeight: "normal" }}>
-            {overview}
-          </h3>
-          <h2 className="text-center mt-3">
-            Release Date:{" "}
-            <span className="h3" style={{ fontWeight: "normal" }}>
-              {release_date}
-            </span>
-          </h2>
-          <h2 className="text-center mt-3">
-            Director:{" "}
-            <span className="h3" style={{ fontWeight: "normal" }}>
-              {credit}
-            </span>{" "}
-          </h2>
-          <AddToWatchlistBtn
-            movieId={movieId}
-            movieInfo={movie}
-            setAlertWatchlist={setAlertWatchlist}
-            isAuthenticated={isAuthenticated}
-          />
-          <ThumbsUpDownBtn
-            movieId={movieId}
-            movieInfo={movie}
-            setAlertRating={setAlertRating}
-            isAuthenticated={isAuthenticated}
-          />
-        </CardBody>
+      <Card className="mt-3">
+        <Row>
+          <Col lg={6}>
+            <CardBody>
+              <h1 className="text-center">{original_title}</h1>
+              <img
+                src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
+                width="100%"
+                height="500px"
+                alt=""
+              />
+            </CardBody>
+          </Col>
+          <Col lg={6}>
+            <CardBody className="text-center mt-2">
+              <h2>Description</h2>
+              <h3 className="text-center mt-3" style={{ fontWeight: "normal" }}>
+                {overview}
+              </h3>
+              <h2 className="text-center mt-3">
+                Release Date:{" "}
+                <span className="h3" style={{ fontWeight: "normal" }}>
+                  {release_date}
+                </span>
+              </h2>
+              <h2 className="text-center mt-3">
+                Director:{" "}
+                <span className="h3" style={{ fontWeight: "normal" }}>
+                  {credit}
+                </span>{" "}
+              </h2>
+              <AddToWatchlistBtn
+                movieId={movieId}
+                movieInfo={movie}
+                setAlertWatchlist={setAlertWatchlist}
+                isAuthenticated={isAuthenticated}
+              />
+              <ThumbsUpDownBtn
+                movieId={movieId}
+                movieInfo={movie}
+                setAlertRating={setAlertRating}
+                isAuthenticated={isAuthenticated}
+              />
+            </CardBody>
+          </Col>
+        </Row>
       </Card>
     </Fragment>
   );
-};
-
-const movieStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gridGap: "1rem",
 };
 
 export default Movie;

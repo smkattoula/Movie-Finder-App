@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Form, FormGroup, Label, Input, Container } from "reactstrap";
+import { Form, FormGroup, Label, Input, Container, Alert } from "reactstrap";
 import AuthContext from "../../context/auth/AuthContext";
 
 const Login = ({ history }) => {
@@ -7,14 +7,21 @@ const Login = ({ history }) => {
 
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
+  const [alert, setAlert] = useState("");
+
   useEffect(() => {
     if (isAuthenticated) {
       history.push("/");
     }
 
     if (error === "Invalid Credentials") {
-      alert("Invalid Credentials");
+      setAlert(<Alert color="danger">Invalid Credentials</Alert>);
+      setTimeout(() => {
+        setAlert();
+        clearErrors();
+      }, 5000);
     }
+    // eslint-disable-next-line
   }, [error, isAuthenticated, history]);
 
   const [user, setUser] = useState({
@@ -29,7 +36,7 @@ const Login = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
-      alert("Please enter all fields");
+      setAlert(<Alert color="danger">Please enter all fields</Alert>);
     } else {
       login({ email, password });
     }
@@ -37,9 +44,10 @@ const Login = ({ history }) => {
 
   return (
     <Container>
-      <h1 className="text-center">
+      <h1 className="text-center mt-3">
         Account <span className="text-info">Login</span>
       </h1>
+      {alert}
       <Form onSubmit={onSubmit}>
         <FormGroup>
           <Label for="email">Email</Label>

@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Button, Alert } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
 const AddToWatchlistBtn = (props) => {
   const movieContext = useContext(MovieContext);
   const { addToWatchlist } = movieContext;
-
-  // const [alert, setAlert] = useState("");
 
   const watchlist = {
     movieId: props.movieId,

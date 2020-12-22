@@ -59,12 +59,11 @@ const ThumbsUpDownBtn = (props) => {
 
   return (
     <>
-      <Button onClick={onClickAddLike} className="mt-3">
-        <i className="fa fa-thumbs-up" style={{ color: "#90ee90" }}></i> {likes}
+      <Button onClick={onClickAddLike} className="mt-3" color="success">
+        <i className="fa fa-thumbs-up"></i> {likes}
       </Button>{" "}
-      <Button onClick={onClickRemoveLike} className="mt-3">
-        <i className="fa fa-thumbs-down" style={{ color: "#ff7f7f" }}></i>{" "}
-        {unlikes}
+      <Button onClick={onClickRemoveLike} className="mt-3" color="danger">
+        <i className="fa fa-thumbs-down"></i> {unlikes}
       </Button>
     </>
   );
