@@ -70,11 +70,11 @@ const MovieState = (props) => {
   };
 
   // Get Featured Movies
-  const getFeaturedMovies = async () => {
+  const getFeaturedMovies = async (page) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/popular?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&page=${page}`
     );
 
     dispatch({ type: GET_FEATURED_MOVIES, payload: res.data.results });
