@@ -11,7 +11,6 @@ const LoadMoreBtn = () => {
   const onClick = () => {
     getFeaturedMovies(page);
     setPage(page + 1);
-    console.log(page);
   };
 
   return (

@@ -44,7 +44,7 @@ export default (state, action) => {
     case GET_FEATURED_MOVIES:
       return {
         ...state,
-        featured: action.payload,
+        featured: [...state.featured, ...action.payload],
         loading: false,
       };
     case GET_MOVIES_WATCHLIST:
