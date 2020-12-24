@@ -14,17 +14,9 @@ const LoadMoreBtn = () => {
   };
 
   return (
-    <Button
-      onClick={onClick}
-      className="mt-3 mb-3"
-      color="info"
-      size="lg"
-      style={{
-        marginLeft: "44.5%",
-      }}
-    >
+    <button onClick={onClick} className="mt-3 mb-3" color="info" size="lg">
       Load More
-    </Button>
+    </button>
   );
 };
 

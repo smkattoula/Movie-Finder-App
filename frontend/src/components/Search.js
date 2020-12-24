@@ -7,6 +7,7 @@ const Search = () => {
 
   const {
     movies,
+    featured,
     searchMovies,
     clearMovies,
     getFeaturedMovies,
@@ -34,7 +35,9 @@ const Search = () => {
 
   const onClear = () => {
     clearMovies();
-    getFeaturedMovies();
+    if (featured.length === 0) {
+      getFeaturedMovies();
+    }
   };
 
   return (

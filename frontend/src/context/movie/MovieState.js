@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import axios from "axios";
+import { API_KEY } from "../../components/Config";
 import MovieContext from "./MovieContext";
 import MovieReducer from "./MovieReducer";
 import {
@@ -40,7 +41,7 @@ const MovieState = (props) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&query=${text}&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${text}&page=1&include_adult=false`
     );
 
     dispatch({
@@ -53,7 +54,7 @@ const MovieState = (props) => {
   const getMovie = async (id) => {
     setLoading();
 
-    const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
+    const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US
     `);
 
     dispatch({ type: GET_MOVIE, payload: res.data });
@@ -63,7 +64,7 @@ const MovieState = (props) => {
   const getCredits = async (id) => {
     setLoading();
 
-    const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US
+    const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US
     `);
 
     dispatch({ type: GET_CREDIT, payload: res.data.crew });
@@ -74,7 +75,7 @@ const MovieState = (props) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=f92856e5e4bd57f9fd884d655c767a2e&language=en-US&page=${page}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
     );
 
     dispatch({ type: GET_FEATURED_MOVIES, payload: res.data.results });

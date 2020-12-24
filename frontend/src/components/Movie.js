@@ -34,8 +34,9 @@ const Movie = ({ match }) => {
     getMovie(match.params.id);
     getCredits(match.params.id);
     getRating(match.params.id);
+
     // eslint-disable-next-line
-  }, []);
+  }, [match.params.id]);
 
   if (loading)
     <Spinner

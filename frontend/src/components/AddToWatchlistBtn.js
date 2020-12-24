@@ -2,32 +2,39 @@ import React, { useContext } from "react";
 import { Button, Alert } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
-const AddToWatchlistBtn = (props) => {
+const AddToWatchlistBtn = ({
+  isAuthenticated,
+  setAlertWatchlist,
+  movieId,
+  movieInfo,
+}) => {
   const movieContext = useContext(MovieContext);
   const { addMovieToWatchlist } = movieContext;
 
   const watchlist = {
-    movieId: props.movieId,
-    movieTitle: props.movieInfo.original_title,
-    movieImage: props.movieInfo.poster_path,
+    movieId: movieId,
+    movieTitle: movieInfo.original_title,
+    movieImage: movieInfo.poster_path,
+  };
+
+  const timeOut = () => {
+    setTimeout(() => {
+      setAlertWatchlist();
+    }, 5000);
   };
 
   const onClick = () => {
-    if (props.isAuthenticated === true) {
+    if (isAuthenticated === true) {
       addMovieToWatchlist(watchlist);
-      props.setAlertWatchlist(
+      setAlertWatchlist(
         <Alert color="success">Movie added to watchlist!</Alert>
       );
-      setTimeout(() => {
-        props.setAlertWatchlist();
-      }, 5000);
+      timeOut();
     } else {
-      props.setAlertWatchlist(
+      setAlertWatchlist(
         <Alert color="danger">Please sign in to add movie to watchlist</Alert>
       );
-      setTimeout(() => {
-        props.setAlertWatchlist();
-      }, 5000);
+      timeOut();
     }
   };
 

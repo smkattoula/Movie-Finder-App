@@ -17,14 +17,18 @@ const ThumbsUpDownBtn = ({
     movieTitle: movieInfo.original_title,
   };
 
+  const timeOut = () => {
+    setTimeout(() => {
+      setAlertRating();
+    }, 5000);
+  };
+
   const onClickAddLike = () => {
     if (isAuthenticated === false) {
       setAlertRating(
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
-      setTimeout(() => {
-        setAlertRating();
-      }, 5000);
+      timeOut();
     }
 
     // eslint-disable-next-line
@@ -42,13 +46,10 @@ const ThumbsUpDownBtn = ({
       setAlertRating(
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
-      setTimeout(() => {
-        setAlertRating();
-      }, 5000);
+      timeOut();
     }
 
-    // eslint-disable-next-line
-    if (ratings.length == 0) {
+    if (ratings.length === 0) {
       postRating(rating);
       getRating(movieId);
       removeLike(movieId);

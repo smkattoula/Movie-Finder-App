@@ -1,29 +1,35 @@
 import React, { useContext, useEffect } from "react";
-import FeaturedMovieItem from "./MovieItem";
+import FeaturedMovieItem from "../components/FeaturedMovieItem";
+import LoadMoreBtn from "../components/LoadMoreBtn";
 import MovieContext from "../context/movie/MovieContext";
 
 const FeaturedMovies = () => {
   const movieContext = useContext(MovieContext);
 
-  const { featured, getFeaturedMovies } = movieContext;
+  const { featured, getFeaturedMovies, movies } = movieContext;
 
   useEffect(() => {
     getFeaturedMovies();
     // eslint-disable-next-line
   }, []);
 
-  return (
-    <>
-      <h1 className="mb-3">
-        Featured <span className="text-info">Movies</span>
-      </h1>
-      <div style={movieStyle}>
-        {featured.map((movie) => (
-          <FeaturedMovieItem key={movie.id} movie={movie} />
-        ))}
-      </div>
-    </>
-  );
+  if (movies.length > 0) {
+    return null;
+  } else {
+    return (
+      <>
+        <h1 className="mb-3">
+          Featured <span className="text-info">Movies</span>
+        </h1>
+        <div style={movieStyle}>
+          {featured.map((movie, index) => (
+            <FeaturedMovieItem key={index} movie={movie} />
+          ))}
+        </div>
+        <LoadMoreBtn />
+      </>
+    );
+  }
 };
 
 const movieStyle = {
