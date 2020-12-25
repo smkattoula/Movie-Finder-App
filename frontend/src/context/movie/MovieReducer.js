@@ -7,7 +7,6 @@ import {
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
-  GET_RATINGS,
   GET_RATING,
   POST_RATING,
   UPDATE_LIKES,
@@ -16,6 +15,8 @@ import {
   CLEAR_MOVIES,
   CLEAR_FEATURED_MOVIES,
   CLEAR_LOGOUT,
+  GET_UPCOMING_MOVIES,
+  CLEAR_UPCOMING_MOVIES,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -47,6 +48,12 @@ export default (state, action) => {
         featured: [...state.featured, ...action.payload],
         loading: false,
       };
+    case GET_UPCOMING_MOVIES:
+      return {
+        ...state,
+        upcoming: action.payload,
+        loading: false,
+      };
     case GET_MOVIES_WATCHLIST:
       return {
         ...state,
@@ -67,7 +74,6 @@ export default (state, action) => {
         ),
         loading: false,
       };
-    case GET_RATINGS:
     case GET_RATING:
       return {
         ...state,
@@ -116,6 +122,12 @@ export default (state, action) => {
       return {
         ...state,
         featured: [],
+        loading: false,
+      };
+    case CLEAR_UPCOMING_MOVIES:
+      return {
+        ...state,
+        upcoming: [],
         loading: false,
       };
     case CLEAR_LOGOUT:

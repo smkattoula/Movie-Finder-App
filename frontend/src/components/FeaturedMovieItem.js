@@ -10,20 +10,22 @@ const FeaturedMovieItem = ({ movie }) => {
       <div>
         <Card className="text-center">
           <CardBody>
-            <CardTitle tag="h5">{title}</CardTitle>
-          </CardBody>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            width="100%"
-            alt=""
-          />
-          <CardBody>
             <Link to={`/movie/${id}`}>
-              <Button style={{ backgroundColor: "#17a2b8", border: "none" }}>
-                More Details
-              </Button>
+              <CardTitle
+                style={{ textDecoration: "underline", color: "black" }}
+                tag="h5"
+              >
+                {title}
+              </CardTitle>
             </Link>
           </CardBody>
+          <Link to={`/movie/${id}`}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              width="100%"
+              alt=""
+            />
+          </Link>
         </Card>
       </div>
     )

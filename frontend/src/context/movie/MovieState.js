@@ -9,10 +9,10 @@ import {
   GET_MOVIE,
   GET_CREDIT,
   GET_FEATURED_MOVIES,
+  GET_UPCOMING_MOVIES,
   GET_MOVIES_WATCHLIST,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
-  GET_RATINGS,
   GET_RATING,
   POST_RATING,
   UPDATE_LIKES,
@@ -21,6 +21,7 @@ import {
   CLEAR_MOVIES,
   CLEAR_LOGOUT,
   CLEAR_FEATURED_MOVIES,
+  CLEAR_UPCOMING_MOVIES,
 } from "../types";
 
 const MovieState = (props) => {
@@ -29,6 +30,7 @@ const MovieState = (props) => {
     movie: {},
     credit: [],
     featured: [],
+    upcoming: [],
     watchlist: [],
     ratings: [],
     loading: false,
@@ -36,7 +38,7 @@ const MovieState = (props) => {
 
   const [state, dispatch] = useReducer(MovieReducer, initialState);
 
-  // Search Movies
+  // Search all movies
   const searchMovies = async (text) => {
     setLoading();
 
@@ -50,7 +52,7 @@ const MovieState = (props) => {
     });
   };
 
-  // Get Movie
+  // Get a single movie by id
   const getMovie = async (id) => {
     setLoading();
 
@@ -60,7 +62,7 @@ const MovieState = (props) => {
     dispatch({ type: GET_MOVIE, payload: res.data });
   };
 
-  // Get Movie Credits
+  // Get movie credits info by id
   const getCredits = async (id) => {
     setLoading();
 
@@ -70,7 +72,7 @@ const MovieState = (props) => {
     dispatch({ type: GET_CREDIT, payload: res.data.crew });
   };
 
-  // Get Featured Movies
+  // Get all featured movies
   const getFeaturedMovies = async (page) => {
     setLoading();
 
@@ -79,6 +81,17 @@ const MovieState = (props) => {
     );
 
     dispatch({ type: GET_FEATURED_MOVIES, payload: res.data.results });
+  };
+
+  // Get all upcoming movies
+  const getUpcomingMovies = async () => {
+    setLoading();
+
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`
+    );
+
+    dispatch({ type: GET_UPCOMING_MOVIES, payload: res.data.results });
   };
 
   // Get movies from watchlist
@@ -94,7 +107,7 @@ const MovieState = (props) => {
     }
   };
 
-  // Add movie to watchlist
+  // Add a movie to watchlist
   const addMovieToWatchlist = async (watchlist) => {
     setLoading();
 
@@ -113,7 +126,7 @@ const MovieState = (props) => {
     }
   };
 
-  // Delete a movie from the watchlist
+  // Delete a movie from watchlist
   const deleteMovieFromWatchlist = async (id) => {
     setLoading();
 
@@ -126,20 +139,7 @@ const MovieState = (props) => {
     }
   };
 
-  // Get all available ratings for movies
-  const getRatings = async () => {
-    setLoading();
-
-    try {
-      const res = await axios.get(`/api/ratings`);
-
-      dispatch({ type: GET_RATINGS, payload: res.data });
-    } catch (error) {
-      dispatch({ type: MOVIE_ERROR, payload: error.response.msg });
-    }
-  };
-
-  // Get single available rating for a movie
+  // Get single available rating for a movie by id
   const getRating = async (id) => {
     setLoading();
 
@@ -197,11 +197,14 @@ const MovieState = (props) => {
     }
   };
 
-  // Clear movies state for clear button functionality
+  // Clear movies state
   const clearMovies = () => dispatch({ type: CLEAR_MOVIES });
 
   // Clear featured movies state
   const clearFeaturedMovies = () => dispatch({ type: CLEAR_FEATURED_MOVIES });
+
+  // Clear upcoming movies state
+  const clearUpcomingMovies = () => dispatch({ type: CLEAR_UPCOMING_MOVIES });
 
   // Clear state when user logs out
   const clearLogout = () => dispatch({ type: CLEAR_LOGOUT });
@@ -217,20 +220,22 @@ const MovieState = (props) => {
         movieItems: state.movieItems,
         credit: state.credit,
         featured: state.featured,
+        upcoming: state.upcoming,
         watchlist: state.watchlist,
         ratings: state.ratings,
         loading: state.loading,
         searchMovies,
         clearMovies,
         clearFeaturedMovies,
+        clearUpcomingMovies,
         clearLogout,
         getMovie,
         getCredits,
         getFeaturedMovies,
+        getUpcomingMovies,
         getMoviesFromWatchlist,
         addMovieToWatchlist,
         deleteMovieFromWatchlist,
-        getRatings,
         getRating,
         postRating,
         addLike,

@@ -11,7 +11,9 @@ const Search = () => {
     searchMovies,
     clearMovies,
     getFeaturedMovies,
+    getUpcomingMovies,
     clearFeaturedMovies,
+    clearUpcomingMovies,
   } = movieContext;
 
   const [text, setText] = useState("");
@@ -25,6 +27,7 @@ const Search = () => {
         setAlert();
       }, 5000);
     } else {
+      clearUpcomingMovies();
       clearFeaturedMovies();
       searchMovies(text);
       setText("");
@@ -36,6 +39,7 @@ const Search = () => {
   const onClear = () => {
     clearMovies();
     if (featured.length === 0) {
+      getUpcomingMovies();
       getFeaturedMovies();
     }
   };

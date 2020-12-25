@@ -18,7 +18,7 @@ const FeaturedMovies = () => {
   } else {
     return (
       <>
-        <h1 className="mb-3">
+        <h1 className="mt-3 mb-3">
           Featured <span className="text-info">Movies</span>
         </h1>
         <div style={movieStyle}>

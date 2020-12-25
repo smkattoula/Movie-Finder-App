@@ -3,6 +3,7 @@ import Search from "../components/Search";
 import Movies from "../components/Movies";
 import FeaturedMovies from "../components/FeaturedMovies";
 import AuthContext from "../context/auth/AuthContext";
+import UpcomingMoviesCarousel from "./UpcomingMoviesCarousel";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -18,6 +19,7 @@ const Home = () => {
   return (
     <Fragment>
       <Search />
+      <UpcomingMoviesCarousel />
       <Movies />
       <FeaturedMovies />
     </Fragment>

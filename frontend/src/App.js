@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Container } from "reactstrap";
 import AppNavbar from "./components/AppNavbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -25,7 +26,7 @@ const App = () => {
         <Router>
           <div className="App">
             <AppNavbar />
-            <div className="container">
+            <Container>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
@@ -34,7 +35,7 @@ const App = () => {
                 <Route exact path="/movie/:id" component={Movie} />
                 <PrivateRoute exact path="/watchlist" component={WatchList} />
               </Switch>
-            </div>
+            </Container>
           </div>
         </Router>
       </MovieState>

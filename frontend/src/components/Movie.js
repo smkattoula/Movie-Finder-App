@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Button, Card, CardBody, Spinner, Col, Row } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 import AuthContext from "../context/auth/AuthContext";
-import AddToWatchlistBtn from "./AddToWatchlistBtn";
-import ThumbsUpDownBtn from "./ThumbsUpDownBtns";
+import AddToWatchlistBtn from "../components/AddToWatchlistBtn";
+import ThumbsUpDownBtns from "../components/ThumbsUpDownBtns";
 
 const Movie = ({ match }) => {
   const movieContext = useContext(MovieContext);
@@ -91,7 +91,7 @@ const Movie = ({ match }) => {
                 setAlertWatchlist={setAlertWatchlist}
                 isAuthenticated={isAuthenticated}
               />
-              <ThumbsUpDownBtn
+              <ThumbsUpDownBtns
                 movieId={movieId}
                 movieInfo={movie}
                 ratings={ratings}
