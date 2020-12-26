@@ -28,9 +28,7 @@ const UpcomingMoviesCarousel = () => {
         <h1 className="mb-3">
           Upcoming <span className="text-info">Movies</span>
         </h1>
-        <div className="carousel">
-          <UncontrolledCarousel items={items} />
-        </div>
+        <UncontrolledCarousel items={items} />
       </>
     );
   }

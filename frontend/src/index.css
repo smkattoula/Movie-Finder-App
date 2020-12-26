@@ -4,6 +4,26 @@
   margin: 0;
 }
 
-.carousel > img {
-  width: 100%;
+.btn-like {
+  border: none;
+  background-color: #fff;
+  color: rgb(60, 179, 96);
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.btn-unlike {
+  border: none;
+  background-color: #fff;
+  color: tomato;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn-like:hover {
+  color: green;
+}
+
+.btn-unlike:hover {
+  color: rgb(214, 79, 55);
 }

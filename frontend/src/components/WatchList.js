@@ -18,7 +18,6 @@ const WatchList = () => {
 
   const {
     getMoviesFromWatchlist,
-    getRatings,
     deleteMovieFromWatchlist,
     watchlist,
     loading,
@@ -29,7 +28,6 @@ const WatchList = () => {
   useEffect(() => {
     loadUser();
     getMoviesFromWatchlist();
-    getRatings();
     // eslint-disable-next-line
   }, []);
 
