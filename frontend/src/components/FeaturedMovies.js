@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FeaturedMovieItem from "../components/FeaturedMovieItem";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 import MovieContext from "../context/movie/MovieContext";
@@ -6,10 +6,21 @@ import MovieContext from "../context/movie/MovieContext";
 const FeaturedMovies = () => {
   const movieContext = useContext(MovieContext);
 
-  const { featured, getFeaturedMovies, movies } = movieContext;
+  const {
+    featured,
+    getFeaturedMovies,
+    clearFeaturedMovies,
+    movies,
+    loading,
+  } = movieContext;
+
+  const [page, setPage] = useState(2);
 
   useEffect(() => {
-    getFeaturedMovies();
+    if (featured.length >= 0 && loading === false) {
+      clearFeaturedMovies();
+      getFeaturedMovies();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -26,7 +37,7 @@ const FeaturedMovies = () => {
             <FeaturedMovieItem key={index} movie={movie} />
           ))}
         </div>
-        <LoadMoreBtn />
+        <LoadMoreBtn page={page} setPage={setPage} />
       </>
     );
   }

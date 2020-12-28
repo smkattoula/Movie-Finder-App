@@ -1,16 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Button } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
-const LoadMoreBtn = () => {
+const LoadMoreBtn = ({ page, setPage }) => {
   const movieContext = useContext(MovieContext);
   const { getFeaturedMovies } = movieContext;
-
-  const [page, setPage] = useState(2);
 
   const onClick = () => {
     getFeaturedMovies(page);
     setPage(page + 1);
+    console.log(page);
   };
 
   return (

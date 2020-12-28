@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Alert } from "reactstrap";
+import { Alert } from "reactstrap";
 import MovieContext from "../context/movie/MovieContext";
 
 const ThumbsUpDownBtn = ({
@@ -8,18 +8,23 @@ const ThumbsUpDownBtn = ({
   movieId,
   movieInfo,
   ratings,
+  loading,
 }) => {
   const movieContext = useContext(MovieContext);
-  const { addLike, removeLike, postRating, getRating } = movieContext;
+  const { addLike, removeLike, postRating } = movieContext;
 
   const rating = {
     movieId: movieId,
     movieTitle: movieInfo.original_title,
   };
 
-  const likes = ratings.map((rating) => rating.likes.length);
+  const likes = ratings
+    .map((rating) => rating.likes)
+    .map((user) => user.length);
 
-  const unlikes = ratings.map((rating) => rating.unlikes.length);
+  const unlikes = ratings
+    .map((rating) => rating.unlikes)
+    .map((user) => user.length);
 
   const timeOut = () => {
     setTimeout(() => {
@@ -35,7 +40,7 @@ const ThumbsUpDownBtn = ({
       timeOut();
     }
 
-    if (ratings.length === 0) {
+    if (ratings.length === 0 && loading === false) {
       postRating(rating);
       addLike(movieId);
     } else {
@@ -51,7 +56,7 @@ const ThumbsUpDownBtn = ({
       timeOut();
     }
 
-    if (ratings.length === 0) {
+    if (ratings.length === 0 && loading === false) {
       postRating(rating);
       removeLike(movieId);
     } else {

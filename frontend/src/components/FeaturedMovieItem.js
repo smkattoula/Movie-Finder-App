@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, CardTitle, Button } from "reactstrap";
+import { Card, CardBody, CardTitle } from "reactstrap";
 
 const FeaturedMovieItem = ({ movie }) => {
   const { title, poster_path, id } = movie;

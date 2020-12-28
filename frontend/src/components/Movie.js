@@ -92,6 +92,7 @@ const Movie = ({ match }) => {
                 isAuthenticated={isAuthenticated}
               />
               <ThumbsUpDownBtns
+                loading={loading}
                 movieId={movieId}
                 movieInfo={movie}
                 ratings={ratings}
