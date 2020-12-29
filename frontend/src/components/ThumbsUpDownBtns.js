@@ -36,9 +36,7 @@ const ThumbsUpDownBtn = ({
       timeOut();
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      setTimeout(() => {
-        addLike(movieId);
-      }, 10);
+      addLike(movieId);
     } else {
       addLike(movieId);
     }
@@ -52,9 +50,7 @@ const ThumbsUpDownBtn = ({
       timeOut();
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      setTimeout(() => {
-        removeLike(movieId);
-      }, 10);
+      removeLike(movieId);
     } else {
       removeLike(movieId);
     }
