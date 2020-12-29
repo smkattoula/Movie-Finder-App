@@ -18,13 +18,9 @@ const ThumbsUpDownBtn = ({
     movieTitle: movieInfo.original_title,
   };
 
-  const likes = ratings
-    .map((rating) => rating.likes)
-    .map((user) => user.length);
+  const likes = ratings.map((rating) => rating.likes.length);
 
-  const unlikes = ratings
-    .map((rating) => rating.unlikes)
-    .map((user) => user.length);
+  const unlikes = ratings.map((rating) => rating.unlikes.length);
 
   const timeOut = () => {
     setTimeout(() => {
@@ -38,11 +34,11 @@ const ThumbsUpDownBtn = ({
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       timeOut();
-    }
-
-    if (ratings.length === 0 && loading === false) {
+    } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      addLike(movieId);
+      setTimeout(() => {
+        addLike(movieId);
+      }, 10);
     } else {
       addLike(movieId);
     }
@@ -54,11 +50,11 @@ const ThumbsUpDownBtn = ({
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       timeOut();
-    }
-
-    if (ratings.length === 0 && loading === false) {
+    } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      removeLike(movieId);
+      setTimeout(() => {
+        removeLike(movieId);
+      }, 10);
     } else {
       removeLike(movieId);
     }
