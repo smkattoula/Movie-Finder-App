@@ -18,19 +18,13 @@ const Movies = () => {
     );
   } else {
     return (
-      <div style={movieStyle}>
+      <div className="movie-style">
         {movies.map((movie) => (
           <MovieItem key={movie.id} movie={movie} />
         ))}
       </div>
     );
   }
-};
-
-const movieStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridGap: "1rem",
 };
 
 export default Movies;

@@ -43,5 +43,73 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.movie-style {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+@media (min-width: 280px) and (max-width: 374px) {
+  .hide-font {
+    display: none;
+  }
+
+  .btn-load {
+    font-size: 8px;
+  }
+
+  .carousel-item:after {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@media (min-width: 375px) and (max-width: 499px) {
+  h5 {
+    font-size: 8px;
+  }
+
+  .btn-load {
+    font-size: 10px;
+  }
+
+  .carousel-item:after {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
+  h5 {
+    font-size: 10px;
+  }
+
+  .btn-load {
+    font-size: 12px;
+  }
+
+  .carousel-item:after {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@media (min-width: 800px) {
+  h5 {
+    font-size: 12px;
+  }
+
+  .btn-load {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1000px) {
+  h5 {
+    font-size: 14px;
+  }
+
+  .btn-load {
+    font-size: 18px;
+  }
 }

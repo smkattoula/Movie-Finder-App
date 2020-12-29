@@ -8,8 +8,8 @@ const FeaturedMovieItem = ({ movie }) => {
   return (
     poster_path && (
       <div>
-        <Card className="text-center">
-          <CardBody>
+        <Card className="text-center h-100">
+          <CardBody className="hide-font">
             <Link to={`/movie/${id}`}>
               <CardTitle
                 style={{ textDecoration: "underline", color: "black" }}

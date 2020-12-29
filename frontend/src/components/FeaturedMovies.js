@@ -32,7 +32,7 @@ const FeaturedMovies = () => {
         <h1 className="mt-3 mb-3">
           Featured <span className="text-info">Movies</span>
         </h1>
-        <div style={movieStyle}>
+        <div className="movie-style">
           {featured.map((movie, index) => (
             <FeaturedMovieItem key={index} movie={movie} />
           ))}
@@ -41,12 +41,6 @@ const FeaturedMovies = () => {
       </>
     );
   }
-};
-
-const movieStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridGap: "1rem",
 };
 
 export default FeaturedMovies;
