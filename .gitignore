@@ -10,9 +10,8 @@ node_modules/
 /coverage
 
 # production
-/build
+/frontend/build
 default.json
-Config.js
 
 # misc
 .DS_Store

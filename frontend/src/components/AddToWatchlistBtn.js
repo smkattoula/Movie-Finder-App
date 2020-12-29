@@ -20,7 +20,7 @@ const AddToWatchlistBtn = ({
   const timeOut = () => {
     setTimeout(() => {
       setAlertWatchlist();
-    }, 5000);
+    }, 3000);
   };
 
   const onClick = () => {

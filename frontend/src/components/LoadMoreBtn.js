@@ -9,18 +9,14 @@ const LoadMoreBtn = ({ page, setPage }) => {
   const onClick = () => {
     getFeaturedMovies(page);
     setPage(page + 1);
-    console.log(page);
   };
 
   return (
     <Button
       onClick={onClick}
-      className="mt-3 mb-3"
+      className="btn-load mt-3 mb-3"
       color="info"
       size="lg"
-      style={{
-        marginLeft: "44.5%",
-      }}
     >
       Load More
     </Button>

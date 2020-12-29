@@ -31,8 +31,7 @@ const AppNavbar = () => {
       </NavItem>
       <NavItem>
         <NavLink onClick={onLogout} href="/">
-          <i className="fas fa-sign-out-alt"></i>{" "}
-          <span className="hide-sm">Logout</span>
+          <i className="fas fa-sign-out-alt fa-sm"></i> <span>Logout</span>
         </NavLink>
       </NavItem>
     </Fragment>
@@ -57,7 +56,7 @@ const AppNavbar = () => {
     <div>
       <Navbar color="info" dark expand="md">
         <NavbarBrand href="/">
-          <i className="fas fa-film"></i> Movie Finder
+          <i className="fas fa-ticket-alt fa-sm"></i> Movie Finder
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

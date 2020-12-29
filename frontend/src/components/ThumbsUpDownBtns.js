@@ -25,7 +25,7 @@ const ThumbsUpDownBtn = ({
   const timeOut = () => {
     setTimeout(() => {
       setAlertRating();
-    }, 5000);
+    }, 3000);
   };
 
   const onClickLike = () => {
@@ -36,7 +36,9 @@ const ThumbsUpDownBtn = ({
       timeOut();
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      addLike(movieId);
+      setTimeout(() => {
+        addLike(movieId);
+      }, 500);
     } else {
       addLike(movieId);
     }
@@ -50,7 +52,9 @@ const ThumbsUpDownBtn = ({
       timeOut();
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
-      removeLike(movieId);
+      setTimeout(() => {
+        removeLike(movieId);
+      }, 500);
     } else {
       removeLike(movieId);
     }

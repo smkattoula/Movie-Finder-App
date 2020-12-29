@@ -48,7 +48,7 @@ const Movie = ({ match }) => {
   return (
     <Fragment>
       <div className="mt-3">{alertWatchlist}</div>
-      <div className="mt-3">{alertRating}</div>
+      <div>{alertRating}</div>
       <Button color="info" className="mt-5">
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>
           Back To Search
