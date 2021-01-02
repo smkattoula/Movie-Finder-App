@@ -30,11 +30,13 @@ const AddToWatchlistBtn = ({
         <Alert color="success">Movie added to watchlist!</Alert>
       );
       timeOut();
+      window.scrollTo(0, 0);
     } else {
       setAlertWatchlist(
         <Alert color="danger">Please sign in to add movie to watchlist</Alert>
       );
       timeOut();
+      window.scrollTo(0, 0);
     }
   };
 

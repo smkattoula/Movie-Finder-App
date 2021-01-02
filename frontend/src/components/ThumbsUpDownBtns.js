@@ -34,6 +34,7 @@ const ThumbsUpDownBtn = ({
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       timeOut();
+      window.scrollTo(0, 0);
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
       setTimeout(() => {
@@ -50,6 +51,7 @@ const ThumbsUpDownBtn = ({
         <Alert color="danger">Please sign in to rate movie</Alert>
       );
       timeOut();
+      window.scrollTo(0, 0);
     } else if (ratings.length === 0 && loading === false) {
       postRating(rating);
       setTimeout(() => {
