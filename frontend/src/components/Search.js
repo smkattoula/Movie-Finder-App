@@ -25,7 +25,7 @@ const Search = () => {
       setAlert(<Alert color="danger">Please enter a search term</Alert>);
       setTimeout(() => {
         setAlert();
-      }, 5000);
+      }, 3000);
     } else {
       clearUpcomingMovies();
       clearFeaturedMovies();

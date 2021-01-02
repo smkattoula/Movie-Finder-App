@@ -16,11 +16,12 @@ const Movie = ({ match }) => {
   const {
     getMovie,
     getCredits,
+    getRating,
+    clearMovieDetails,
     loading,
     movie,
     credit,
     ratings,
-    getRating,
   } = movieContext;
 
   const { loadUser, isAuthenticated } = authContext;
@@ -34,9 +35,10 @@ const Movie = ({ match }) => {
     getMovie(match.params.id);
     getCredits(match.params.id);
     getRating(match.params.id);
+    window.scrollTo(0, 0);
 
     // eslint-disable-next-line
-  }, [match.params.id]);
+  }, []);
 
   if (loading)
     <Spinner
@@ -49,22 +51,30 @@ const Movie = ({ match }) => {
     <Fragment>
       <div className="mt-3">{alertWatchlist}</div>
       <div>{alertRating}</div>
-      <Button color="info" className="mt-5">
-        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+      <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+        <Button
+          onClick={() => {
+            clearMovieDetails();
+          }}
+          color="info"
+          className="mt-5"
+        >
           Back To Search
-        </Link>
-      </Button>
+        </Button>
+      </Link>
       <Card className="mt-3">
         <Row>
           <Col lg={6}>
             <CardBody>
               <h1 className="text-center">{original_title}</h1>
-              <img
-                src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
-                width="100%"
-                height="500px"
-                alt=""
-              />
+              {poster_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w780/${poster_path}`}
+                  width="100%"
+                  height="500px"
+                  alt=""
+                />
+              )}
             </CardBody>
           </Col>
           <Col lg={6}>

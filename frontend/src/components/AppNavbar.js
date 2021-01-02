@@ -27,10 +27,12 @@ const AppNavbar = () => {
     <Fragment>
       <NavLink style={{ color: "white" }}>Hello, {user && user.name}!</NavLink>
       <NavItem>
-        <NavLink href="/watchlist">My Watchlist</NavLink>
+        <NavLink className="navbar-link" href="/watchlist">
+          My Watchlist
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink onClick={onLogout} href="/">
+        <NavLink className="navbar-link" onClick={onLogout} href="/">
           <i className="fas fa-sign-out-alt fa-sm"></i> <span>Logout</span>
         </NavLink>
       </NavItem>
@@ -40,10 +42,14 @@ const AppNavbar = () => {
   const guestLinks = (
     <Fragment>
       <NavItem>
-        <NavLink href="/register">Register</NavLink>
+        <NavLink className="navbar-link" href="/register">
+          Register
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/login">Login</NavLink>
+        <NavLink className="navbar-link" href="/login">
+          Login
+        </NavLink>
       </NavItem>
     </Fragment>
   );

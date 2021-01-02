@@ -8,8 +8,9 @@ import Movie from "./components/Movie";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import WatchList from "./components/WatchList";
-import "./index.css";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import NotFound from "./components/NotFound";
+import "./index.css";
 
 import MovieState from "./context/movie/MovieState";
 import AuthState from "./context/auth/AuthState";
@@ -34,6 +35,7 @@ const App = () => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/movie/:id" component={Movie} />
                 <PrivateRoute exact path="/watchlist" component={WatchList} />
+                <Route component={NotFound} />
               </Switch>
             </Container>
           </div>

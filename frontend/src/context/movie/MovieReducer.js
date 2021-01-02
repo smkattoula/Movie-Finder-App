@@ -5,6 +5,7 @@ import {
   GET_CREDIT,
   GET_FEATURED_MOVIES,
   GET_MOVIES_WATCHLIST,
+  GET_UPCOMING_MOVIES,
   ADD_MOVIE_WATCHLIST,
   DELETE_MOVIE_WATCHLIST,
   GET_RATING,
@@ -14,9 +15,9 @@ import {
   MOVIE_ERROR,
   CLEAR_MOVIES,
   CLEAR_FEATURED_MOVIES,
-  CLEAR_LOGOUT,
-  GET_UPCOMING_MOVIES,
   CLEAR_UPCOMING_MOVIES,
+  CLEAR_MOVIE_DETAILS,
+  CLEAR_LOGOUT,
 } from "../types";
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -128,6 +129,13 @@ export default (state, action) => {
       return {
         ...state,
         upcoming: [],
+        loading: false,
+      };
+    case CLEAR_MOVIE_DETAILS:
+      return {
+        ...state,
+        movie: {},
+        credit: [],
         loading: false,
       };
     case CLEAR_LOGOUT:

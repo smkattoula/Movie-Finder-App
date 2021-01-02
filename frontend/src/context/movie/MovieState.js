@@ -22,6 +22,7 @@ import {
   CLEAR_LOGOUT,
   CLEAR_FEATURED_MOVIES,
   CLEAR_UPCOMING_MOVIES,
+  CLEAR_MOVIE_DETAILS,
 } from "../types";
 
 const MovieState = (props) => {
@@ -206,6 +207,9 @@ const MovieState = (props) => {
   // Clear upcoming movies state
   const clearUpcomingMovies = () => dispatch({ type: CLEAR_UPCOMING_MOVIES });
 
+  // Clear movie and credit state
+  const clearMovieDetails = () => dispatch({ type: CLEAR_MOVIE_DETAILS });
+
   // Clear state when user logs out
   const clearLogout = () => dispatch({ type: CLEAR_LOGOUT });
 
@@ -228,6 +232,7 @@ const MovieState = (props) => {
         clearMovies,
         clearFeaturedMovies,
         clearUpcomingMovies,
+        clearMovieDetails,
         clearLogout,
         getMovie,
         getCredits,

@@ -58,12 +58,12 @@ const WatchList = () => {
                       style={{ color: "black" }}
                       to={`/movie/${movie.movieId}`}
                     >
-                      <h6 className="mt-3">{movie.movieTitle}</h6>
+                      <h6 className="mt-4">{movie.movieTitle}</h6>
                     </Link>
                   </Col>
                   <Col lg={1}>
                     <Button
-                      className="mt-3"
+                      className="mt-4"
                       color="danger"
                       onClick={() => deleteMovieFromWatchlist(movie._id)}
                     >
