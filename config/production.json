@@ -1,4 +1,0 @@
-{
-    "MONGO_URI": "mongodb+srv://smkattoula:SHka9092@moviefinder.b74xd.mongodb.net/<dbname>?retryWrites=true&w=majority",
-    "JWT_SECRET": "nE3WGy69NX3M2WAhqxZv5WjJsWGssKmY5qm3kw7fU38WzywPh7"
-}
