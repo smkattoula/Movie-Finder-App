@@ -15,9 +15,9 @@ Movie Finder is a full-stack web application that aims to solve the problem of f
 **Shaker Kattoula - Full Stack Web Developer - shakerkattoula.com**
 
 ### Goal
-* 
-*
-*
+* Develop a full-stack web application that fetches data from a third-party API.
+* Demonstrate my understanding in the core fundamentals of full-stack web development. 
+* Solve a real world problem by engineering creative solutions using code. 
 
 ### Phases
 * Phase 1: Backend - Server initialization, MongoDB with Models using an ODM(Mongoose) and REST API routes.
@@ -27,7 +27,7 @@ Movie Finder is a full-stack web application that aims to solve the problem of f
 * Phase 5: Deployment - Prepare build and deploy to Heroku.
 
 ### User Stories
-* As a guest, I WANT to be able to search for any movie in the database by typing a movie name in the search bar and GET a list of movies based on my search term. 
+* As a guest, I WANT to be able to search for any movie in the database by typing a movie name in the search bar and get a list of movies based on my search term. 
 * As a guest, I WANT to be able to click on any movie title and see the details of that movie(name, description, release date and director).
 * As a guest, I WANT to be able to see a list of the latest movies on the front page and be able to click a button to load more movies.
 
