@@ -41,7 +41,7 @@ Movie Finder is a full-stack web application that aims to solve the problem of f
 * As a user, I WANT to be able to rate a movie by liking or disliking it. 
 
 ## Blockers and Challenges
-1.
+1. One challenge I had during this project was a CORS issue that wouldn't allow me to fetch data from the MovieDB API after I had added authentication middleware to the backend REST API's. The first solution I found was to add `https://cors-anywhere.herokuapp.com/` to the beginning of all MovieDB API fetch requests. It had worked, but the problem now was that fetching data from the MovieDB API became significantly slower. This is due to the fact that heroku's `cors-anywhere` is a proxy that adds CORS headers to requests. So in order to send a response to the client from the MovieDB API, the data first has to pass through heroku's `cors-anywhere` proxy which enables CORS in the header of the request and THEN it is authorized to pass through to the client. In order to improve the speed of fetch calls, I decided to remove the `cors-anywhere` proxy and just rewrite the auth middleware to accept the correct authorization type: `Bearer Token` from the MovieDB API. Problem solved!
 2.
 3.
 ## Ways to Improve and Future Updates
